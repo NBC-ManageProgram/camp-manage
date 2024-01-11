@@ -14,7 +14,7 @@ public class CampManageController {
         this.inputView = new InputView();
         this.outputView = new OutputView();
     }
-
+    // 타다~
     // 시작
     public void start() {
         while(true) {
