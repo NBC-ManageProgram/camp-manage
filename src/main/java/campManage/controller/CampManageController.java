@@ -70,7 +70,7 @@ public class CampManageController {
 
     }
 
-    // 수강생 수정 : 송선호
+    // 수강생 수정 : 송선호 ( 어예 )
     private void updateStudent() {
 
     }
