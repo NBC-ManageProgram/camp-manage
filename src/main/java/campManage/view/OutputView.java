@@ -1,5 +1,6 @@
 package campManage.view;
 
+import campManage.domain.Student;
 import campManage.domain.StudentList;
 
 public class OutputView {
@@ -71,6 +72,41 @@ public class OutputView {
             "1. Green\n" +
             "2. Yellow\n" +
             "3. Red");
+    }
+
+    public void updateId(){
+        System.out.println(SEPARATE_LINE);
+        System.out.println("\"[[ 수강생의 고유 번호를 입력해주세요 ]]\"");
+    }
+    public void updateList(Student student){
+        String format = "|  %d  |  %s  |  %s  |\n";
+        System.out.println(SEPARATE_LINE);
+        System.out.printf(format,student.getStudentId(),student.getName(),student.getState());
+        System.out.println("\"1. 이름 정보 수정\"\n"
+                + "\"2. 상태 정보 수정\"\n"
+                + "\"3. 돌아가기\"");
+    }
+    public void updateName(Student student) {
+        String format = "|  %d  |  %s  |  %s  |\n";
+        System.out.println(SEPARATE_LINE);
+        System.out.printf(format,student.getStudentId(),student.getName(),student.getState());
+        System.out.println("\"[[ 수정할 이름을 입력해주세요 ]]\"");
+    }
+
+    public void updateState(Student student){
+        String format = "|  %d  |  %s  |  %s  |\n";
+        System.out.println(SEPARATE_LINE);
+        System.out.printf(format,student.getStudentId(),student.getName(),student.getState());
+        System.out.println("\"1. Green\"\n"
+                + "\"2. Yellow\"\n"
+                + "\"3. Red\"");
+    }
+
+    public void updateComplete(Student student){
+        String format = "|  %d  |  %s  |  %s  |\n";
+        System.out.println(SEPARATE_LINE);
+        System.out.println("\"[[수정이 완료되었습니다.]]\"");
+        System.out.printf(format,student.getStudentId(),student.getName(),student.getState());
     }
 
     public void backToManageMenu() {

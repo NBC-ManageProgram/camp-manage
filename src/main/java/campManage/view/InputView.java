@@ -1,7 +1,10 @@
 package campManage.view;
 
 import campManage.domain.State;
+import campManage.domain.Student;
+import campManage.domain.StudentList;
 import campManage.domain.Subject;
+import campManage.service.CampManageService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,6 +22,7 @@ public class InputView {
     private static final int STATE_END_RANGE = 3;
 
     private static final Pattern NAME_PATTERN = Pattern.compile("^[가-힣]{2,10}$");
+    CampManageService campManageService = new CampManageService();
 
 
 
@@ -55,6 +59,18 @@ public class InputView {
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(NAME_ERROR_MESSAGE);
+            }
+        }
+    }
+
+    public Student checkIdStudent(){
+        while (true){
+            try{
+                int id = readUserInput();
+                validateManageStudentRange(id);
+                return StudentList.getInstance().checkStudent(id);
+            }catch(IllegalArgumentException e){
+                System.out.println(INPUT_ERROR_MESSAGE);
             }
         }
     }

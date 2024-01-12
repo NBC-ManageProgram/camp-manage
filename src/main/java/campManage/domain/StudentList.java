@@ -5,6 +5,7 @@ import java.util.List;
 
 public class StudentList {
     List<Student> students = new ArrayList<>();
+    private Student student;
 
     private static final StudentList INSTANCE = new StudentList();
     private StudentList(){}
@@ -14,6 +15,15 @@ public class StudentList {
 
     public void add(Student student) {
         students.add(student);
+    }
+
+    public Student checkStudent(int id){
+        for (Student studentCheck : students) {
+             if(studentCheck.checkId(id)){
+                 return studentCheck;
+             }
+        }
+        throw new IllegalArgumentException();
     }
 
     public void getStudents() {

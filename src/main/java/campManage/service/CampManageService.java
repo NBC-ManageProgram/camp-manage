@@ -24,4 +24,7 @@ public class CampManageService {
 
         studentList.add(new Student(1, name, requireSubjects, scores, state));
     }
+
+    public void updateName(){}
+    public void updateState(){}
 }
