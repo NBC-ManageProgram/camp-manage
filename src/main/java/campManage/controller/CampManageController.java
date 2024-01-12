@@ -134,6 +134,8 @@ public class CampManageController {
      * @author 이도연
      */
     private void createScore() {
+        outputView.StudentId();
+        int studentID = inputView.readStudentId();
 
     }
 

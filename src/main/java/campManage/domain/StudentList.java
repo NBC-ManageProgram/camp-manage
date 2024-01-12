@@ -49,5 +49,11 @@ public class StudentList {
         }
         throw new IllegalArgumentException();
     }
+
+    // 학생 정보 가져오기
+    public Student bringStudent(int id) {
+        return students.stream().filter(student -> student.getStudentId() == id).findFirst()
+            .orElseThrow(() -> new IllegalArgumentException());
+    }
 }
 

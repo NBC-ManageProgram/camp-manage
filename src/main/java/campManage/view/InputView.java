@@ -175,4 +175,18 @@ public class InputView {
             }
         }
     }
+
+    // 학생 고유번호 검증 받고 가져오기
+    public int readStudentId() {
+        while (true) {
+            try {
+                int studentId = readUserInput();
+                StudentList studentList = StudentList.getInstance();
+                return studentList.validateStudentsId(studentId);
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 고유번호를 입력해주세요.");
+            }
+        }
+    }
+
 }

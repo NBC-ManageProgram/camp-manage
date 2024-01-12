@@ -98,4 +98,10 @@ public class OutputView {
     public void deleteCorrect() {
         System.out.println("삭제가 완료되었습니다");
     }
+
+    //이도연
+    public void StudentId() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 고유번호를 입력하세요 ]]");
+    }
 }
