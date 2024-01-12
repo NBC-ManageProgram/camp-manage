@@ -52,15 +52,18 @@ public class CampManageController {
         }
     }
 
-    /** @author 손준형 */
+    /**
+     * 수강생 등록
+     *
+     * @author 손준형 */
     private void createStudent() {
-        outputView.createStudent();
-        String name = inputView.name();
-
-        System.out.println(name);
-
-        outputView.createRequireSubject();
-        List<Subject> requireSubjects = inputView.requireSubject();
+//        outputView.createStudent();
+//        String name = inputView.name();
+//
+//        System.out.println(name);
+//
+//        outputView.createRequireSubject();
+//        List<Subject> requireSubjects = inputView.requireSubject();
 //
 //        outputView.createOptionalSubject();
 //        List<Subject> optionalSubjects = inputView.optionalSubject();
@@ -75,12 +78,18 @@ public class CampManageController {
 
     }
 
-    // 수강생 수정 : 송선호
+    /**
+     * 수강생 수정
+     *
+     * @author 송선호 */
     private void updateStudent() {
 
     }
 
-    // 수강생 삭제 : 꿀석배
+    /**
+     * 수강생 삭제
+     *
+     * @author 전석배 */
     private void deleteStudent() {
 
     }
@@ -99,7 +108,10 @@ public class CampManageController {
         }
     }
 
-    // 점수 등록 : 이도연
+    /**
+     * 점수 등록
+     *
+     * @author 이도연 */
     private void createScore() {
 
     }
@@ -109,7 +121,10 @@ public class CampManageController {
 
     }
 
-    // 점수 수정 : 유경진
+    /**
+     * 점수 수정
+     *
+     * @author 유경진 */
     private void updateScore() {
 
     }
