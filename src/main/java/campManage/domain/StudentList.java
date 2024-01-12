@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentList {
-    List<Student> students = new ArrayList<>();
+
+    private List<Student> students = new ArrayList<>();
 
     private static final StudentList INSTANCE = new StudentList();
-    private StudentList(){}
-    public static StudentList getInstance(){
+
+    private StudentList() {
+    }
+
+    public static StudentList getInstance() {
         return INSTANCE;
     }
 

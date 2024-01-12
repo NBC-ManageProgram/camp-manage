@@ -9,6 +9,7 @@ import campManage.view.OutputView;
 import java.util.List;
 
 public class CampManageController {
+
     private final CampManageService campManageService;
     private final InputView inputView;
     private final OutputView outputView;
@@ -32,7 +33,7 @@ public class CampManageController {
         outputView.manageMenu();
         int manageMenu = inputView.manageMenu();
 
-        switch (manageMenu){
+        switch (manageMenu) {
             case 1 -> manageStudent(); // 1. 수강생 관리
             case 2 -> manageScore(); // 2. 점수 관리
             case 3 -> System.exit(0);
