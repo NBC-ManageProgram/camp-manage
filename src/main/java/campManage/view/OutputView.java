@@ -1,6 +1,7 @@
 package campManage.view;
 
 import campManage.domain.Student;
+import campManage.domain.StudentList;
 import campManage.domain.Subject;
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class OutputView {
 
     private static final String NEWLINE = System.lineSeparator();
     private static final String SEPARATE_LINE = NEWLINE + "==================================";
+
 
     public void manageMenu() {
         System.out.println(SEPARATE_LINE);
@@ -106,7 +108,7 @@ public class OutputView {
         System.out.println("[[ 고유번호를 입력하세요 ]]");
     }
 
-    public void ShowStudentName(Student student,List<Subject> subjects) {
+    public void ShowStudentName(Student student, List<Subject> subjects) {
         System.out.println(SEPARATE_LINE);
         System.out.println(student.getStudentId() + "|" + student.getName() + "|");
         System.out.println("[[ 과목을 입력하세요 ]]");
@@ -115,5 +117,23 @@ public class OutputView {
             Subject subject = subjects.get(i);
             System.out.println((i + 1) + ". " + subject.getName());
         }
+    }
+
+    public static void createScore(Student student, int subjectIndex) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            student.getStudentId() + "|" + student.getName() + "|" + student.getSubject()
+                .get(subjectIndex).getName() + "|");
+        System.out.println("[[ 회차를 입력하세요 ]]");
+
+        }
+
+
+    public static void createScoreComplete(Student student, int subjectIndex) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            student.getStudentId() + "|" + student.getName() + "|" + student.getSubject()
+                .get(subjectIndex).getName() + "|회차|점수|등급");
+
     }
 }

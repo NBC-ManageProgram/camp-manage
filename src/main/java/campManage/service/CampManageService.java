@@ -34,4 +34,5 @@ public class CampManageService {
     public Student getStudentByStudentId(int studentId) {
         return StudentList.getInstance().getStudentByStudentId(studentId);
     }
+
 }

@@ -144,7 +144,12 @@ public class CampManageController {
         // 과목 입력하세요 출력
         outputView.ShowStudentName(student,student.getSubject());
         //점수 입력할 과목 선택받기
-        int studentSubject = inputView.readSelectedSubject();
+        int selectedSubject = inputView.SelectedSubject(student.getSubject().size());
+        //점수 입력하세요 출력
+        outputView.createScore(student,selectedSubject);
+
+        //등록 완료
+        OutputView.createScoreComplete(student,selectedSubject);
     }
 
     // 점수 조회

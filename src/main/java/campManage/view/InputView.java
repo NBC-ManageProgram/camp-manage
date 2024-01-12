@@ -189,9 +189,19 @@ public class InputView {
         }
     }
     // 점수 입력할 과목 선택받기
-    public  int readSelectedSubject(){
+    public  int SelectedSubject(int size){
+        while (true) {
+            try {
+                int studentId = readUserInput();
+                if(studentId > 0 && studentId <= size){
+                    return studentId - 1;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 유효한 고유번호를 입력해주세요.");
+            }
+        }
 
-        return 0;
     }
 
 }

@@ -55,5 +55,8 @@ public class StudentList {
         return students.stream().filter(student -> student.getStudentId() == id).findFirst()
             .orElseThrow(() -> new IllegalArgumentException());
     }
+    // 수강하는 과목 중 성적등록할 과목 가져오기
+
 }
+
 
