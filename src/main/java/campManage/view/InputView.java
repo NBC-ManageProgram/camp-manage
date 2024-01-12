@@ -3,6 +3,7 @@ package campManage.view;
 import campManage.domain.State;
 import campManage.domain.Subject;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -12,10 +13,10 @@ import java.util.regex.Pattern;
 public class InputView {
 
     private static final String INPUT_ERROR_MESSAGE = "[ERROR] 잘못된 값을 입력하였습니다. 다시 입력해주세요.";
-    private static final String NAME_ERROR_MESSAGE =
-        "[ERROR] 잘못된 입력입니다. 공백을 제외한 2글자 이상 10글자 이하의 한글로 입력해 주세요.\n"
-            + "각 과목은 공백으로 구분되어야 합니다.";
-    private static final String SUBJECT_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 1 이상 5 이하의 정수로 입력해주세요.";
+    private static final String NAME_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 공백을 제외한 2글자 이상 10글자 이하의 한글로 입력해 주세요.";
+    private static final String SUBJECT_ERROR_MESSAGE =
+        "[ERROR] 잘못된 입력입니다. 1 이상 5 이하의 정수로 서로 다른 3개 이상의 필수 과목을 선택해주세요.\n" +
+            "각 과목은 공백으로 구분되어야 합니다.";
     private static final int INPUT_START_RANGE = 1;
     private static final int MANAGE_MENU_END_RANGE = 3;
     private static final int MANAGE_STUDENT_END_RANGE = 5;
@@ -63,13 +64,27 @@ public class InputView {
 
     public List<Subject> requireSubject() {
         while (true) {
+            List<Subject> subjects = new ArrayList<>();
             try {
                 String input = readSubjectInput();
                 validateRequireSubject(input);
-                return input;
+
+                List<String> requireSubjectNumbers = Arrays.stream(input.split(" ")).toList();
+                validateIsDuplicate(requireSubjectNumbers);
+
+                for (String requireSubjectNumber : requireSubjectNumbers) {
+                    subjects.add(Subject.getRequireSubjectByOrdinal(Integer.parseInt(requireSubjectNumber)));
+                }
+                return subjects;
             } catch (IllegalArgumentException e) {
-                System.out.println(NAME_ERROR_MESSAGE);
+                System.out.println(SUBJECT_ERROR_MESSAGE);
             }
+        }
+    }
+
+    private void validateIsDuplicate(List<String> requireSubjectNumbers) {
+        if(!(requireSubjectNumbers.stream().distinct().count() == requireSubjectNumbers.size())){
+            throw new IllegalArgumentException();
         }
     }
 
@@ -147,6 +162,9 @@ public class InputView {
     }
 
     private void validateRequireSubject(String input) {
+        if (!REQUIRE_SUBJECT_PATTERN.matcher(input).matches()) {
+            throw new IllegalArgumentException();
+        }
     }
 
 //    private int validateStateRange(int stateNumber) {
