@@ -98,4 +98,23 @@ public class OutputView {
     public void deleteCorrect() {
         System.out.println("삭제가 완료되었습니다");
     }
+
+    public void readStudent() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "\"1. 수강생 전체 정보 조회\"\n"
+                + "\"2. 수강생 상태별 수강생 목록 조회\"\n"
+                + "\"3. 돌아가기\""
+        );
+    }
+
+    public void getAllStudents(StudentList studentList) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "\"[[ 수강생 전체 정보  ]]\"\n"
+                + String.format("| %-4s | %-4s | %-7s | %-3s |",
+                "고유번호", "이름", "상태", "과목명")
+        );
+        studentList.getStudents();
+    }
 }

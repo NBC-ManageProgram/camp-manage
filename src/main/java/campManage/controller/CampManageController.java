@@ -76,9 +76,28 @@ public class CampManageController {
         campManageService.createStudent(name, requireSubjects, optionalSubjects, inputView.state());
     }
 
-    // 수강생 조회
+    /**
+     * 수강생 조회
+     *
+     * @author 전석배,
+     */
     private void readStudent() {
-        StudentList.getInstance().getStudents();
+        // StudentList.getInstance().getStudents();
+        outputView.readStudent();
+        int readChoice = inputView.readStudent();
+        switch (readChoice) {
+            case 1 -> getAllStudents();
+            case 2 -> getStudentsByState();
+            case 3 -> outputView.backToManageMenu();
+        }
+    }
+
+    private void getAllStudents() {
+        StudentList studentList = StudentList.getInstance();
+        outputView.getAllStudents(studentList);
+    }
+
+    private void getStudentsByState() {
     }
 
     /**

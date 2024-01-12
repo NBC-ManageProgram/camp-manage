@@ -2,6 +2,7 @@ package campManage.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StudentList {
 
@@ -26,11 +27,14 @@ public class StudentList {
 
     public void getStudents() {
         for (Student student : students) {
-            System.out.println(student.getStudentId());
-            System.out.println(student.getName());
-            System.out.println(student.getSubject());
-            System.out.println(student.getScores());
-            System.out.println(student.getState());
+            System.out.format(
+                "| %-6s | %-4s | %-8s | ",
+                student.getStudentId(), student.getName(), student.getState()
+            );
+
+            String result = student.getSubject().stream().map(Subject::getName)
+                .collect(Collectors.joining(", "));
+            System.out.println(result + " |");
         }
     }
 

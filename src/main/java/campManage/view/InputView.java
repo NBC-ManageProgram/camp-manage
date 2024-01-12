@@ -175,4 +175,19 @@ public class InputView {
             }
         }
     }
+
+    public int readStudent() {
+        while (true) {
+            try {
+                int readChoice = readUserInput();
+                if (readChoice == 1 || readChoice == 2 || readChoice == 3) {
+                    return readChoice;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 1 이상 3 이하의 정수로 입력해주세요.");
+            }
+        }
+
+    }
 }
