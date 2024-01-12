@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentList {
+
     List<Student> students = new ArrayList<>();
     private Student student;
 
     private static final StudentList INSTANCE = new StudentList();
-    private StudentList(){}
-    public static StudentList getInstance(){
+
+    private StudentList() {
+    }
+
+    public static StudentList getInstance() {
         return INSTANCE;
     }
 
@@ -17,16 +21,16 @@ public class StudentList {
         students.add(student);
     }
 
-    public Student checkStudent(int id){
+    public Student checkStudent(int id) {
         for (Student studentCheck : students) {
-             if(studentCheck.checkId(id)){
-                 return studentCheck;
-             }
+            if (studentCheck.checkId(id)) {
+                return studentCheck;
+            }
         }
         throw new IllegalArgumentException();
     }
 
-    public boolean getStudentsIsEmpty(){
+    public boolean getStudentsIsEmpty() {
         return students.isEmpty();
     }
 

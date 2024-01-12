@@ -81,12 +81,10 @@ public class CampManageController {
     }
 
 
-
-    private void checkStudentListIsEmpty(){
-        if(StudentList.getInstance().getStudentsIsEmpty()){
+    private void checkStudentListIsEmpty() {
+        if (StudentList.getInstance().getStudentsIsEmpty()) {
             outputView.checkIsEmpty();
-        }
-        else{
+        } else {
             updateStudent();
         }
     }

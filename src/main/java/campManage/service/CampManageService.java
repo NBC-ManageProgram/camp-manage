@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CampManageService {
-//    private final Student student;
+
+    //    private final Student student;
 //    private final Score score;
 //    private final Subject subject;
     private final StudentList studentList;
@@ -20,7 +21,8 @@ public class CampManageService {
         this.studentList = StudentList.getInstance();
     }
 
-    public void createStudent(String name, List<Subject> requireSubjects, List<Subject> optionalSubjects, State state) {
+    public void createStudent(String name, List<Subject> requireSubjects,
+            List<Subject> optionalSubjects, State state) {
         requireSubjects.addAll(optionalSubjects);
         List<Score> scores = new ArrayList<>();
 
