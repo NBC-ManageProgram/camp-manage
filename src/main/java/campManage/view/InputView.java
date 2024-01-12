@@ -75,6 +75,18 @@ public class InputView {
         }
     }
 
+    public int selectNumber(){
+        while (true){
+            try{
+                int updateSelectNumber = readUserInput();
+                validateUpdateSelectRange(updateSelectNumber);
+                return updateSelectNumber;
+            }catch (IllegalArgumentException e){
+                System.out.println(INPUT_ERROR_MESSAGE);
+            }
+        }
+    }
+
     public List<Subject> requireSubject() {
         while (true) {
             List<Subject> subjects = new ArrayList<>();
@@ -145,6 +157,13 @@ public class InputView {
         if (!NAME_PATTERN.matcher(input).matches()) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private int validateUpdateSelectRange(int updateSelectNumber){
+        if(INPUT_START_RANGE <= updateSelectNumber && updateSelectNumber <= MANAGE_MENU_END_RANGE){
+            return updateSelectNumber;
+        }
+        throw new IllegalArgumentException();
     }
 
 //    private int validateStateRange(int stateNumber) {

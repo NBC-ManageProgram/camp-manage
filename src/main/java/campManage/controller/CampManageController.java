@@ -91,7 +91,7 @@ public class CampManageController {
         Student student = inputView.checkIdStudent();
         // 2. 수강생 정보 수정 리스트 출력
         outputView.updateList(student);
-        int updateSelectNumber = inputView.readUserInput();
+        int updateSelectNumber = inputView.selectNumber();
         switch (updateSelectNumber) {
             // 3. 이름 수정시 출력
             case 1 -> {
@@ -112,25 +112,21 @@ public class CampManageController {
 
     public void updateName(Student student) {
         outputView.updateName(student);
-        String name = inputView.readUserNameInput();
+        String name = inputView.name();
         // setter 지양 하기 위한 방법으로 빌더패턴 사용
         student.changeName(name);
     }
 
-    ;
-
     public void updateState(Student student) {
         int STATE_INDEX = 1;
         outputView.updateState(student);
-        int ordinal = inputView.readUserInput();
+        int ordinal = inputView.selectNumber();
         for (State state : State.values()) {
-            if (state.ordinal() == ordinal + STATE_INDEX) {
+            if (state.ordinal() + STATE_INDEX == ordinal) {
                 student.changeState(state);
             }
         }
     }
-
-    ;
 
     /**
      * 수강생 삭제
