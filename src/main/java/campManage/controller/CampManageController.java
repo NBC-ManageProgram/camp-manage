@@ -1,8 +1,10 @@
 package campManage.controller;
 
+import campManage.domain.Subject;
 import campManage.service.CampManageService;
 import campManage.view.InputView;
 import campManage.view.OutputView;
+import java.util.List;
 
 public class CampManageController {
     private final CampManageService campManageService;
@@ -50,13 +52,15 @@ public class CampManageController {
         }
     }
 
-    // 수강생 등록 : 손준형
+    /** @author 손준형 */
     private void createStudent() {
-//        outputView.createStudent();
-//        String name = inputView.name();
-//
-//        outputView.createRequireSubject();
-//        List<Subject> requireSubjects = inputView.requireSubject();
+        outputView.createStudent();
+        String name = inputView.name();
+
+        System.out.println(name);
+
+        outputView.createRequireSubject();
+        List<Subject> requireSubjects = inputView.requireSubject();
 //
 //        outputView.createOptionalSubject();
 //        List<Subject> optionalSubjects = inputView.optionalSubject();
