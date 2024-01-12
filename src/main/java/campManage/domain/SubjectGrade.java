@@ -1,7 +1,6 @@
 package campManage.domain;
 
 public enum SubjectGrade {
-    // 바뀔 여지 있음
     A,
     B,
     C,
