@@ -80,7 +80,11 @@ public class CampManageController {
         StudentList.getInstance().getStudents();
     }
 
-
+    /**
+     * 수강생 등록
+     *
+     * @author 송선호
+     */
     private void checkStudentListIsEmpty() {
         if (StudentList.getInstance().getStudentsIsEmpty()) {
             outputView.checkIsEmpty();
@@ -89,6 +93,11 @@ public class CampManageController {
         }
     }
 
+    /**
+     * 수강생 등록
+     *
+     * @author 송선호
+     */
     private void updateStudent() {
         // 1. 수강생의 고유번호를 입력받는 화면 출력
         outputView.updateId();
