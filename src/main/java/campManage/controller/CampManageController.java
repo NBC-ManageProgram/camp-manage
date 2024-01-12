@@ -1,5 +1,6 @@
 package campManage.controller;
 
+import campManage.domain.State;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
 import campManage.service.CampManageService;
@@ -21,7 +22,7 @@ public class CampManageController {
 
     // 시작
     public void start() {
-        while(true) {
+        while (true) {
             selectManage();
         }
     }
@@ -43,7 +44,7 @@ public class CampManageController {
     private void manageStudent() {
         outputView.manageStudent();
         int manageStudent = inputView.manageStudent();
-        switch (manageStudent){
+        switch (manageStudent) {
             case 1 -> createStudent();
             case 2 -> readStudent();
             case 3 -> updateStudent();
@@ -55,12 +56,11 @@ public class CampManageController {
     /**
      * 수강생 등록
      *
-     * @author 손준형 */
+     * @author 손준형
+     */
     private void createStudent() {
         outputView.createStudent();
         String name = inputView.name();
-
-        System.out.println(name);
 
         outputView.createRequireSubject();
         List<Subject> requireSubjects = inputView.requireSubject();
@@ -69,8 +69,9 @@ public class CampManageController {
         List<Subject> optionalSubjects = inputView.optionalSubject();
 
         outputView.createState();
+        State state = inputView.state();
 
-        campManageService.createStudent(name, requireSubjects, optionalSubjects, inputView.state());
+        campManageService.createStudent(name, requireSubjects, optionalSubjects, state);
     }
 
     // 수강생 조회
@@ -81,7 +82,8 @@ public class CampManageController {
     /**
      * 수강생 수정
      *
-     * @author 송선호 */
+     * @author 송선호
+     */
     private void updateStudent() {
 
     }
@@ -89,7 +91,8 @@ public class CampManageController {
     /**
      * 수강생 삭제
      *
-     * @author 전석배 */
+     * @author 전석배
+     */
     private void deleteStudent() {
 
     }
@@ -100,7 +103,7 @@ public class CampManageController {
         outputView.manageScore();
         int manageScore = inputView.manageScore();
 
-        switch (manageScore){
+        switch (manageScore) {
             case 1 -> createScore();
             case 2 -> readScore();
             case 3 -> updateScore();
@@ -111,7 +114,8 @@ public class CampManageController {
     /**
      * 점수 등록
      *
-     * @author 이도연 */
+     * @author 이도연
+     */
     private void createScore() {
 
     }
@@ -124,7 +128,8 @@ public class CampManageController {
     /**
      * 점수 수정
      *
-     * @author 유경진 */
+     * @author 유경진
+     */
     private void updateScore() {
 
     }

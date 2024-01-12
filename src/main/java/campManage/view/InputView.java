@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class InputView {
     private static final String INPUT_ERROR_MESSAGE = "[ERROR] 잘못된 값을 입력하였습니다. 다시 입력해주세요.";
-    private static final String NAME_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 공백을 제외한 한글로 입력해 주세요.";
+    private static final String NAME_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 공백을 제외한 2글자 이상 10글자 이하의 한글로 입력해 주세요.";
     private static final int INPUT_START_RANGE = 1;
     private static final int MANAGE_MENU_END_RANGE = 3;
     private static final int MANAGE_STUDENT_END_RANGE = 5;
@@ -19,9 +19,6 @@ public class InputView {
     private static final int STATE_END_RANGE = 3;
 
     private static final Pattern NAME_PATTERN = Pattern.compile("^[가-힣]{2,10}$");
-
-
-
 
     public int manageMenu() {
         return getInputWithValidation(this::readUserInput, this::validateManageMenuRange);
