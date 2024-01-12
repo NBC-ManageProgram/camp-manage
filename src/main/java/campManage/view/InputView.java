@@ -184,7 +184,7 @@ public class InputView {
                 StudentList studentList = StudentList.getInstance();
                 return studentList.validateStudentsId(studentId);
             } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 고유번호를 입력해주세요.");
+                System.out.println("[ERROR] 잘못된 입력입니다. 유효한 고유번호를 입력해주세요.");
             }
         }
     }

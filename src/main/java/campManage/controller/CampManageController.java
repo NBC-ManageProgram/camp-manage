@@ -134,9 +134,13 @@ public class CampManageController {
      * @author 이도연
      */
     private void createScore() {
-        outputView.StudentId();
+        // 고유번호 입력하세요 출력
+        outputView.inputStudentId();
+        //검증한 고유번호 입력받기
         int studentID = inputView.readStudentId();
-
+        //서비스
+        Student student = campManageService.getStudentByStudentId(studentID);
+        outputView.ShowStudentName(student,student.getSubject());
     }
 
     // 점수 조회

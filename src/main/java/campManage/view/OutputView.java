@@ -1,7 +1,8 @@
 package campManage.view;
 
 import campManage.domain.Student;
-import campManage.domain.StudentList;
+import campManage.domain.Subject;
+import java.util.List;
 
 public class OutputView {
 
@@ -100,8 +101,19 @@ public class OutputView {
     }
 
     //이도연
-    public void StudentId() {
+    public void inputStudentId() {
         System.out.println(SEPARATE_LINE);
         System.out.println("[[ 고유번호를 입력하세요 ]]");
+    }
+
+    public void ShowStudentName(Student student,List<Subject> subjects) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(student.getStudentId() + "|" + student.getName() + "|");
+        System.out.println("[[ 과목을 입력하세요 ]]");
+
+        for (int i = 0; i < subjects.size(); i++) {
+            Subject subject = subjects.get(i);
+            System.out.println((i + 1) + ". " + subject.getName());
+        }
     }
 }
