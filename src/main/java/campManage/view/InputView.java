@@ -201,7 +201,7 @@ public class InputView {
     }
 
     private void validateCheckSameState(Student student, int ordinal){
-        if(student.getState().ordinal() + 1 == ordinal){
+        if(student.getState().ordinal() + INPUT_START_RANGE == ordinal){
             throw new IllegalArgumentException();
         }
     }
