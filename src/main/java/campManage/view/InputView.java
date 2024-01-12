@@ -1,6 +1,7 @@
 package campManage.view;
 
 import campManage.domain.State;
+import campManage.domain.StudentList;
 import campManage.domain.Subject;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.function.IntSupplier;
 import java.util.regex.Pattern;
 
 public class InputView {
+
     private static final String INPUT_ERROR_MESSAGE = "[ERROR] 잘못된 값을 입력하였습니다. 다시 입력해주세요.";
     private static final String NAME_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 공백을 제외한 한글로 입력해 주세요.";
     private static final int INPUT_START_RANGE = 1;
@@ -19,8 +21,6 @@ public class InputView {
     private static final int STATE_END_RANGE = 3;
 
     private static final Pattern NAME_PATTERN = Pattern.compile("^[가-힣]{2,10}$");
-
-
 
 
     public int manageMenu() {
@@ -36,7 +36,7 @@ public class InputView {
     }
 
 
-    private <T>T getInputWithValidation(IntSupplier inputSupplier, Function<Integer, T> function) {
+    private <T> T getInputWithValidation(IntSupplier inputSupplier, Function<Integer, T> function) {
         while (true) {
             try {
                 int input = inputSupplier.getAsInt();
@@ -112,7 +112,8 @@ public class InputView {
     }
 
     private int validateManageStudentRange(int manageStudentNumber) {
-        if (INPUT_START_RANGE <= manageStudentNumber && manageStudentNumber <= MANAGE_STUDENT_END_RANGE) {
+        if (INPUT_START_RANGE <= manageStudentNumber
+            && manageStudentNumber <= MANAGE_STUDENT_END_RANGE) {
             return manageStudentNumber;
         }
         throw new IllegalArgumentException();
@@ -148,6 +149,30 @@ public class InputView {
         return Integer.parseInt(sc.nextLine());
     }
 
+    public int deleteStudentId() {
+        while (true) {
+            try {
+                int studentId = readUserInput();
+                StudentList studentList = StudentList.getInstance();
+                return studentList.validateStudentsId(studentId);
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 고유번호를 입력해주세요.");
+            }
+        }
+    }
 
 
+    public int userDeleteChoice() {
+        while (true) {
+            try {
+                int userDeleteChoice = readUserInput();
+                if (userDeleteChoice == 1 || userDeleteChoice == 2) {
+                    return userDeleteChoice;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 올바른 번호를 입력해주세요.");
+            }
+        }
+    }
 }

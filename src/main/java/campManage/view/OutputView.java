@@ -1,5 +1,6 @@
 package campManage.view;
 
+import campManage.domain.Student;
 import campManage.domain.StudentList;
 
 public class OutputView {
@@ -77,4 +78,22 @@ public class OutputView {
         System.out.println("이전 메뉴로 돌아갑니다.");
     }
 
+
+    public void deleteStudentId() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 삭제할 고유번호를 입력하세요 ]]");
+    }
+
+    public void isRealDelete(Student student) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "\"[[ 삭제하시겠습니까? ]]\"\n"
+            + "\"|  " + student.getStudentId() + "  |  "+student.getName() +"  |  " + student.getState() +"  |    "+student.getSubject() +"    |\"\n"
+            + "\"1. 삭제 2. 돌아가기\""
+        );
+    }
+
+    public void deleteCorrect() {
+        System.out.println("삭제가 완료되었습니다");
+    }
 }

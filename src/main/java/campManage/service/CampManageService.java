@@ -24,4 +24,12 @@ public class CampManageService {
 
         studentList.add(new Student(1, name, requireSubjects, scores, state));
     }
+
+    public void deleteStudent(Student student){
+        studentList.delete(student);
+    }
+
+    public Student getStudentByStudentId(int studentId){
+        return StudentList.getInstance().getStudentByStudentId(studentId);
+    }
 }
