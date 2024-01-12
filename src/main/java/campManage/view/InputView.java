@@ -12,6 +12,7 @@ public class InputView {
     private static final int INPUT_START_RANGE = 1;
     private static final int MANAGE_MENU_END_RANGE = 3;
     private static final int MANAGE_STUDENT_END_RANGE = 5;
+    private static final int MANAGE_SCORE_END_RANGE = 4;
 
 
 
@@ -21,6 +22,10 @@ public class InputView {
 
     public int manageStudent() {
         return getInputWithValidation(this::readUserInput, this::validateManageStudentRange);
+    }
+
+    public int manageScore() {
+        return getInputWithValidation(this::readUserInput, this::validateManageScoreRange);
     }
 
     private <T>T getInputWithValidation(IntSupplier inputSupplier, Function<Integer, T> function) {
@@ -45,6 +50,13 @@ public class InputView {
     private int validateManageStudentRange(int manageStudentNumber) {
         if (INPUT_START_RANGE <= manageStudentNumber && manageStudentNumber <= MANAGE_STUDENT_END_RANGE) {
             return manageStudentNumber;
+        }
+        throw new IllegalArgumentException();
+    }
+
+    private int validateManageScoreRange(int manageScoreNumber) {
+        if (INPUT_START_RANGE <= manageScoreNumber && manageScoreNumber <= MANAGE_SCORE_END_RANGE) {
+            return manageScoreNumber;
         }
         throw new IllegalArgumentException();
     }

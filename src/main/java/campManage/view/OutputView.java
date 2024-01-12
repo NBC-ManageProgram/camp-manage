@@ -26,6 +26,17 @@ public class OutputView {
                 "관리 항목을 선택하세요...");
     }
 
+    public void manageScore() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "1. 점수 등록\n" +
+                "2. 점수 조회\n" +
+                "3. 점수 수정\n" +
+                "4. 돌아가기\n" +
+
+                "관리 항목을 선택하세요...");
+    }
+
     public void backToManageMenu() {
         System.out.println("이전 메뉴로 돌아갑니다.");
     }
