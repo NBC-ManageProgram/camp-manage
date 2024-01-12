@@ -4,7 +4,7 @@ public enum Subject {
     JAVA("Java", SubjectCategory.REQUIRE),
     OOP("객체지향", SubjectCategory.REQUIRE),
     SPRING("Spring", SubjectCategory.REQUIRE),
-    JPA("JPA",SubjectCategory.REQUIRE),
+    JPA("JPA", SubjectCategory.REQUIRE),
     MYSQL("MYSQL", SubjectCategory.REQUIRE),
 
     DESIGN_PATTERN("디자인 패턴", SubjectCategory.OPTIONAL),
@@ -25,7 +25,7 @@ public enum Subject {
 
     public static Subject getRequireSubjectByOrdinal(int ordinal) {
         for (Subject subject : Subject.values()) {
-            if(subject.ordinal() + REQUIRE_SUBJECT_INDEX == ordinal){
+            if (subject.ordinal() + REQUIRE_SUBJECT_INDEX == ordinal) {
                 return subject;
             }
         }
@@ -34,7 +34,7 @@ public enum Subject {
 
     public static Subject getOptionalSubjectByOrdinal(int ordinal) {
         for (Subject subject : Subject.values()) {
-            if(subject.ordinal() == ordinal + OPTIONAL_SUBJECT_INDEX){
+            if (subject.ordinal() == ordinal + OPTIONAL_SUBJECT_INDEX) {
                 return subject;
             }
         }

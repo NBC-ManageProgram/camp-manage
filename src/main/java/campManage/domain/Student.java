@@ -3,6 +3,7 @@ package campManage.domain;
 import java.util.List;
 
 public class Student {
+
     private final int studentId;
     private String name;
     private List<Subject> subject;
