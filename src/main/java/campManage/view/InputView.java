@@ -188,5 +188,10 @@ public class InputView {
             }
         }
     }
+    // 점수 입력할 과목 선택받기
+    public  int readSelectedSubject(){
+
+        return 0;
+    }
 
 }

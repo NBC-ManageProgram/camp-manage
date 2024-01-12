@@ -140,7 +140,11 @@ public class CampManageController {
         int studentID = inputView.readStudentId();
         //서비스
         Student student = campManageService.getStudentByStudentId(studentID);
+
+        // 과목 입력하세요 출력
         outputView.ShowStudentName(student,student.getSubject());
+        //점수 입력할 과목 선택받기
+        int studentSubject = inputView.readSelectedSubject();
     }
 
     // 점수 조회
