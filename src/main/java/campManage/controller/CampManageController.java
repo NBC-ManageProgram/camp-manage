@@ -47,7 +47,7 @@ public class CampManageController {
         switch (manageStudent) {
             case 1 -> createStudent();
             case 2 -> readStudent();
-            case 3 -> updateStudent();
+            case 3 -> checkStudentListIsEmpty();
             case 4 -> deleteStudent();
             case 5 -> outputView.backToManageMenu();
         }
@@ -80,11 +80,17 @@ public class CampManageController {
         StudentList.getInstance().getStudents();
     }
 
-    /**
-     * 수강생 수정
-     *
-     * @author 송선호
-     */
+
+
+    private void checkStudentListIsEmpty(){
+        if(StudentList.getInstance().getStudentsIsEmpty()){
+            outputView.checkIsEmpty();
+        }
+        else{
+            updateStudent();
+        }
+    }
+
     private void updateStudent() {
         // 1. 수강생의 고유번호를 입력받는 화면 출력
         outputView.updateId();
@@ -95,38 +101,20 @@ public class CampManageController {
         switch (updateSelectNumber) {
             // 3. 이름 수정시 출력
             case 1 -> {
-                updateName(student);
+                campManageService.updateName(student, outputView, inputView);
                 // 5. 수정 완료시 전체 정보 확인차 출력
                 outputView.updateComplete(student);
             }
             // 4. 상태 수정시 출력
             case 2 -> {
-                updateState(student);
+                campManageService.updateState(student, outputView, inputView);
                 // 5. 수정 완료시 전체 정보 확인차 출력
                 outputView.updateComplete(student);
             }
             case 3 -> outputView.backToManageMenu();
         }
-
     }
 
-    public void updateName(Student student) {
-        outputView.updateName(student);
-        String name = inputView.name();
-        // setter 지양 하기 위한 방법으로 빌더패턴 사용
-        student.changeName(name);
-    }
-
-    public void updateState(Student student) {
-        int STATE_INDEX = 1;
-        outputView.updateState(student);
-        int ordinal = inputView.selectNumber();
-        for (State state : State.values()) {
-            if (state.ordinal() + STATE_INDEX == ordinal) {
-                student.changeState(state);
-            }
-        }
-    }
 
     /**
      * 수강생 삭제

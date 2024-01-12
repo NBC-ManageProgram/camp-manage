@@ -26,6 +26,10 @@ public class StudentList {
         throw new IllegalArgumentException();
     }
 
+    public boolean getStudentsIsEmpty(){
+        return students.isEmpty();
+    }
+
     public void getStudents() {
         for (Student student : students) {
             System.out.println(student.getStudentId());

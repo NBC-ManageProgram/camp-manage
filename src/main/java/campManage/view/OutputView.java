@@ -109,6 +109,11 @@ public class OutputView {
         System.out.printf(format,student.getStudentId(),student.getName(),student.getState());
     }
 
+    public void checkIsEmpty(){
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[ERROR] 수강생이 등록이 되어 있지 않습니다. 수강생 등록을 먼저 해주세요");
+    }
+
     public void backToManageMenu() {
         System.out.println("이전 메뉴로 돌아갑니다.");
     }
