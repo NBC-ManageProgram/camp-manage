@@ -1,5 +1,7 @@
 package campManage.view;
 
+import campManage.domain.StudentList;
+
 public class OutputView {
     private static final String NEWLINE = System.lineSeparator();
     private static final String SEPARATE_LINE = NEWLINE + "==================================";
@@ -35,6 +37,40 @@ public class OutputView {
                 "4. 돌아가기\n" +
 
                 "관리 항목을 선택하세요...");
+    }
+
+    public void createStudent() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 이름을 입력해주세요. ]]");
+    }
+
+    public void createRequireSubject() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 필수 과목을 3개 이상 선택해주세요. ]]\n" +
+            "((ex) 1 2 3)\n" +
+            "1. Java\n" +
+            "2. 객체지향\n" +
+            "3. Spring\n" +
+            "4. JPA\n" +
+            "5. MYSQL");
+    }
+
+    public void createOptionalSubject() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 선택 과목을 2개 이상 선택해주세요. ]]\n" +
+            "((ex) 1 2)\n" +
+            "1. 디자인 패턴\n" +
+            "2. Spring Security\n" +
+            "3. Redis\n" +
+            "4. MongoDB");
+    }
+
+    public void createState() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 상태를 설정해주세요 ]]\n" +
+            "1. Green\n" +
+            "2. Yellow\n" +
+            "3. Red");
     }
 
     public void backToManageMenu() {

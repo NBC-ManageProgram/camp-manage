@@ -1,5 +1,6 @@
 package campManage.controller;
 
+import campManage.domain.StudentList;
 import campManage.domain.Subject;
 import campManage.service.CampManageService;
 import campManage.view.InputView;
@@ -42,7 +43,6 @@ public class CampManageController {
     private void manageStudent() {
         outputView.manageStudent();
         int manageStudent = inputView.manageStudent();
-
         switch (manageStudent){
             case 1 -> createStudent();
             case 2 -> readStudent();
@@ -57,25 +57,25 @@ public class CampManageController {
      *
      * @author 손준형 */
     private void createStudent() {
-//        outputView.createStudent();
-//        String name = inputView.name();
-//
-//        System.out.println(name);
-//
-//        outputView.createRequireSubject();
-//        List<Subject> requireSubjects = inputView.requireSubject();
-//
-//        outputView.createOptionalSubject();
-//        List<Subject> optionalSubjects = inputView.optionalSubject();
-//
-//        outputView.createState();
-//
-//        Student student = campManageService.createStudent(name, requireSubjects, optionalSubjects, inputView.state());
+        outputView.createStudent();
+        String name = inputView.name();
+
+        System.out.println(name);
+
+        outputView.createRequireSubject();
+        List<Subject> requireSubjects = inputView.requireSubject();
+
+        outputView.createOptionalSubject();
+        List<Subject> optionalSubjects = inputView.optionalSubject();
+
+        outputView.createState();
+
+        campManageService.createStudent(name, requireSubjects, optionalSubjects, inputView.state());
     }
 
     // 수강생 조회
     private void readStudent() {
-
+        StudentList.getInstance().getStudents();
     }
 
     /**
