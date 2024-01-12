@@ -20,7 +20,7 @@ public class StudentList {
         students.add(student);
     }
 
-    public void delete(Student student){
+    public void delete(Student student) {
         students.remove(student);
     }
 
@@ -34,7 +34,7 @@ public class StudentList {
         }
     }
 
-    public Student getStudentByStudentId(int studentId){
+    public Student getStudentByStudentId(int studentId) {
         return students.stream()
             .filter(student -> student.getStudentId() == studentId)
             .findFirst()
@@ -42,12 +42,12 @@ public class StudentList {
     }
 
     public int validateStudentsId(int studentId) { // return int
-         boolean validate = students.stream()
+        boolean validate = students.stream()
             .anyMatch(student -> student.getStudentId() == studentId);
-         if (validate){
-             return studentId;
-         }
-         throw new IllegalArgumentException();
+        if (validate) {
+            return studentId;
+        }
+        throw new IllegalArgumentException();
     }
 }
 
