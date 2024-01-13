@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 
 public class StudentList {
 
-    List<Student> students = new ArrayList<>();
-    private Student student;
+
+    private List<Student> students = new ArrayList<>();
 
     private static final StudentList INSTANCE = new StudentList();
+    private static final int INDEX = 1;
+
 
     private StudentList() {
     }
@@ -22,6 +24,14 @@ public class StudentList {
         students.add(student);
     }
 
+    public Student getLastStudents() {
+        return students.get(students.size() - INDEX);
+    }
+
+    public int getNextId() {
+        return students.size() + INDEX;
+    }
+  
     public Student checkStudent(int id) {
         for (Student studentCheck : students) {
             if (studentCheck.checkId(id)) {
@@ -33,6 +43,7 @@ public class StudentList {
 
     public boolean getStudentsIsEmpty() {
         return students.isEmpty();
+    }
 
     public void delete(Student student) {
         students.remove(student);

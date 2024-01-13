@@ -25,8 +25,7 @@ public class CampManageService {
         List<Subject> optionalSubjects, State state) {
         requireSubjects.addAll(optionalSubjects);
         List<Score> scores = new ArrayList<>();
-
-        studentList.add(new Student(1, name, requireSubjects, scores, state));
+        studentList.add(new Student(studentList.getNextId(), name, requireSubjects, scores, state));
     }
 
 
@@ -45,6 +44,7 @@ public class CampManageService {
                 student.changeState(state);
             }
         }
+    }
 
     public void deleteStudent(Student student) {
         studentList.delete(student);
