@@ -24,7 +24,6 @@ public class InputView {
     private static final int STATE_END_RANGE = 3;
 
     private static final Pattern NAME_PATTERN = Pattern.compile("^[가-힣]{2,10}$");
-    CampManageService campManageService = new CampManageService();
 
 
     public int manageMenu() {
