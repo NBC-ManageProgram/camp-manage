@@ -8,7 +8,7 @@ public class StudentList {
     private List<Student> students = new ArrayList<>();
 
     private static final StudentList INSTANCE = new StudentList();
-    private static final int NEXT_ID = 1;
+    private static final int INDEX = 1;
 
     private StudentList() {
     }
@@ -22,11 +22,11 @@ public class StudentList {
     }
 
     public Student getLastStudents() {
-        return students.get(students.size()-1);
+        return students.get(students.size() - INDEX);
     }
 
     public int getNextId() {
-        return students.size()+NEXT_ID;
+        return students.size() + INDEX;
     }
 }
 

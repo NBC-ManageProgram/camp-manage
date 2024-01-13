@@ -90,7 +90,7 @@ public class OutputView {
             }
         });
 
-        System.out.printf("  |  %s  |"+ NEWLINE, student.getState());
+        System.out.printf("  |  %s  |" + NEWLINE, student.getState());
         System.out.printf("고유번호는 [ %d ] 번 입니다.", student.getStudentId());
     }
 
