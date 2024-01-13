@@ -7,14 +7,10 @@ import java.util.stream.Collectors;
 public class StudentList {
 
 
-    private List<Student> students = new ArrayList<>();
+    private final List<Student> students = new ArrayList<>();
 
     private static final StudentList INSTANCE = new StudentList();
     private static final int INDEX = 1;
-
-
-    private StudentList() {
-    }
 
     public static StudentList getInstance() {
         return INSTANCE;
@@ -30,6 +26,10 @@ public class StudentList {
 
     public int getNextId() {
         return students.size() + INDEX;
+    }
+
+    public List<Student> getStudentByState(State state){
+        return students.stream().filter(e -> e.getState() == state).collect(Collectors.toList());
     }
   
     public Student checkStudent(int id) {
@@ -47,7 +47,6 @@ public class StudentList {
 
     public void delete(Student student) {
         students.remove(student);
-
     }
 
     public void getStudents() {
@@ -67,7 +66,7 @@ public class StudentList {
         return students.stream()
             .filter(student -> student.getStudentId() == studentId)
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException());
+            .orElseThrow(IllegalArgumentException::new);
     }
 
     public int validateStudentsId(int studentId) { // return int
