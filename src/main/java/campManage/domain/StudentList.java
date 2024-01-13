@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class StudentList {
 
     List<Student> students = new ArrayList<>();
+    private Student student;
 
     private static final StudentList INSTANCE = new StudentList();
 
@@ -21,8 +22,21 @@ public class StudentList {
         students.add(student);
     }
 
+    public Student checkStudent(int id) {
+        for (Student studentCheck : students) {
+            if (studentCheck.checkId(id)) {
+                return studentCheck;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public boolean getStudentsIsEmpty() {
+        return students.isEmpty();
+
     public void delete(Student student) {
         students.remove(student);
+
     }
 
     public void getStudents() {
