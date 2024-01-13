@@ -28,10 +28,10 @@ public class StudentList {
         return students.size() + INDEX;
     }
 
-    public List<Student> getStudentByState(State state){
+    public List<Student> getStudentByState(State state) {
         return students.stream().filter(e -> e.getState() == state).collect(Collectors.toList());
     }
-  
+
     public Student checkStudent(int id) {
         for (Student studentCheck : students) {
             if (studentCheck.checkId(id)) {
@@ -52,26 +52,26 @@ public class StudentList {
     public void getStudents() {
         for (Student student : students) {
             System.out.format(
-                "| %-6s | %-4s | %-8s | ",
-                student.getStudentId(), student.getName(), student.getState()
+                    "| %-6s | %-4s | %-8s | ",
+                    student.getStudentId(), student.getName(), student.getState()
             );
 
             String result = student.getSubject().stream().map(Subject::getName)
-                .collect(Collectors.joining(", "));
+                    .collect(Collectors.joining(", "));
             System.out.println(result + " |");
         }
     }
 
     public Student getStudentByStudentId(int studentId) {
         return students.stream()
-            .filter(student -> student.getStudentId() == studentId)
-            .findFirst()
-            .orElseThrow(IllegalArgumentException::new);
+                .filter(student -> student.getStudentId() == studentId)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public int validateStudentsId(int studentId) { // return int
         boolean validate = students.stream()
-            .anyMatch(student -> student.getStudentId() == studentId);
+                .anyMatch(student -> student.getStudentId() == studentId);
         if (validate) {
             return studentId;
         }

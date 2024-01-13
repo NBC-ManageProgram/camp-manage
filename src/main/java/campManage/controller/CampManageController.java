@@ -101,6 +101,7 @@ public class CampManageController {
         StudentList studentList = StudentList.getInstance();
         outputView.getAllStudents(studentList);
     }
+
     /**
      * 수강생 조회
      *
@@ -118,9 +119,9 @@ public class CampManageController {
      *
      * @author 송선호
      */
-    private void selectStudentByState(State state){
+    private void selectStudentByState(State state) {
         List<Student> studentsState = StudentList.getInstance().getStudentByState(state);
-        outputView.getStudentStateLi(studentsState,state);
+        outputView.getStudentStateLi(studentsState, state);
     }
 
     /**
@@ -131,8 +132,7 @@ public class CampManageController {
     private void updateStudent() {
         if (StudentList.getInstance().getStudentsIsEmpty()) {
             outputView.checkIsEmpty();
-        }
-        else {
+        } else {
             // 1. 수강생의 고유번호를 입력받는 화면 출력
             outputView.updateId();
             Student student = inputView.checkIdStudent();
