@@ -81,7 +81,7 @@ public class CampManageController {
     }
 
     /**
-     * 수강생 등록
+     * 수강생 수정
      *
      * @author 송선호
      */
