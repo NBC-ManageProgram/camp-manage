@@ -17,18 +17,18 @@ public class InputView {
 
     private static final String INPUT_ERROR_MESSAGE = "[ERROR] 잘못된 값을 입력하였습니다. 다시 입력해주세요.";
     private static final String NAME_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 공백을 제외한 2글자 이상 10글자 이하의 한글로 입력해 주세요.";
-  
+
     private static final String REQUIRE_SUBJECT_ERROR_MESSAGE =
-        "[ERROR] 잘못된 입력입니다. 1 이상 5 이하의 정수로 서로 다른 3개 이상의 필수 과목을 선택해주세요.\n" +
-            "각 과목은 공백으로 구분되어야 합니다.";
-  
+            "[ERROR] 잘못된 입력입니다. 1 이상 5 이하의 정수로 서로 다른 3개 이상의 필수 과목을 선택해주세요.\n" +
+                    "각 과목은 공백으로 구분되어야 합니다.";
+
     private static final String OPTIONAL_SUBJECT_ERROR_MESSAGE =
-        "[ERROR] 잘못된 입력입니다. 1 이상 4 이하의 정수로 서로 다른 2개 이상의 선택 과목을 선택해주세요.\n" +
-            "각 과목은 공백으로 구분되어야 합니다.";
-  
+            "[ERROR] 잘못된 입력입니다. 1 이상 4 이하의 정수로 서로 다른 2개 이상의 선택 과목을 선택해주세요.\n" +
+                    "각 과목은 공백으로 구분되어야 합니다.";
+
     private static final String STATE_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 1 이상 3 이하의 정수로 입력해주세요.";
     private static final String UPDATE_INPUT_MESSAGE = "[ERROR] 잘못된 입력입니다. 유효한 고유번호를 입력해주세요.";
-  
+
     private static final int INPUT_START_RANGE = 1;
     private static final int MANAGE_MENU_END_RANGE = 3;
     private static final int MANAGE_STUDENT_END_RANGE = 5;
@@ -50,13 +50,13 @@ public class InputView {
     }
 
     public List<Subject> readSubjects(Consumer<String> consumer,
-        Function<Integer, Subject> function, String errorMessage) {
+            Function<Integer, Subject> function, String errorMessage) {
         while (true) {
             List<Subject> subjects = new ArrayList<>();
             try {
                 String input = readLineInput();
                 consumer.accept(input);
-              
+
                 List<String> subjectNumbers = Arrays.stream(input.split(" ")).toList();
                 validateIsDuplicate(subjectNumbers);
 
@@ -82,6 +82,7 @@ public class InputView {
             throw new IllegalArgumentException();
         }
     }
+
     public int manageMenu() {
         return getInputWithValidation(this::validateManageMenuRange, INPUT_ERROR_MESSAGE);
     }
@@ -116,20 +117,20 @@ public class InputView {
     public List<Subject> requireSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getRequireSubjectByOrdinal;
         return readSubjects(this::validateRequireSubject, subjectMapper,
-            REQUIRE_SUBJECT_ERROR_MESSAGE);
+                REQUIRE_SUBJECT_ERROR_MESSAGE);
     }
 
     public List<Subject> optionalSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getOptionalSubjectByOrdinal;
         return readSubjects(this::validateOptionalSubject, subjectMapper,
-            OPTIONAL_SUBJECT_ERROR_MESSAGE);
+                OPTIONAL_SUBJECT_ERROR_MESSAGE);
     }
 
 
     public String checkSameName(Student student) {
         while (true) {
             try {
-                String input = readUserNameInput();
+                String input = readLineInput();
                 validateName(input);
                 validateSameName(input, student);
                 return input;
@@ -253,6 +254,28 @@ public class InputView {
                 System.out.println("[ERROR] 잘못된 입력입니다. 1 이상 3 이하의 정수로 입력해주세요.");
             }
         }
-
     }
+
+    private void validateSameName(String input, Student student) {
+        if (student.getName().equals(input)) {
+            throw new IllegalArgumentException();
+        } else if (!NAME_PATTERN.matcher(input).matches()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateCheckSameState(Student student, int ordinal) {
+        if (student.getState().ordinal() + 1 == ordinal) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private int validateUpdateSelectRange(int updateSelectNumber) {
+        if (INPUT_START_RANGE <= updateSelectNumber
+                && updateSelectNumber <= MANAGE_MENU_END_RANGE) {
+            return updateSelectNumber;
+        }
+        throw new IllegalArgumentException();
+    }
+
 }
