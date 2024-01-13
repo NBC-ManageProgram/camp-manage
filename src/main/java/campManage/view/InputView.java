@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.IntSupplier;
 import java.util.regex.Pattern;
 
 public class InputView {
