@@ -18,6 +18,18 @@ public class Student {
         this.state = state;
     }
 
+    public boolean checkId(int id) {
+        return this.studentId == id;
+    }
+
+    public void changeName(String name) {
+        this.name = name;
+    }
+
+    public void changeState(State state) {
+        this.state = state;
+    }
+
     public int getStudentId() {
         return studentId;
     }
