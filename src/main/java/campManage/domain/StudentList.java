@@ -8,6 +8,7 @@ public class StudentList {
     private List<Student> students = new ArrayList<>();
 
     private static final StudentList INSTANCE = new StudentList();
+    private static final int NEXT_ID = 1;
 
     private StudentList() {
     }
@@ -20,14 +21,12 @@ public class StudentList {
         students.add(student);
     }
 
-    public void getStudents() {
-        for (Student student : students) {
-            System.out.println(student.getStudentId());
-            System.out.println(student.getName());
-            System.out.println(student.getSubject());
-            System.out.println(student.getScores());
-            System.out.println(student.getState());
-        }
+    public Student getLastStudents() {
+        return students.get(students.size()-1);
+    }
+
+    public int getNextId() {
+        return students.size()+NEXT_ID;
     }
 }
 

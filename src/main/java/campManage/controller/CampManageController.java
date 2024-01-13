@@ -73,11 +73,12 @@ public class CampManageController {
         State state = inputView.state();
 
         campManageService.createStudent(name, requireSubjects, optionalSubjects, state);
+        outputView.createComplete();
     }
 
     // 수강생 조회
     private void readStudent() {
-        StudentList.getInstance().getStudents();
+
     }
 
     /**
