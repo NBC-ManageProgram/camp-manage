@@ -91,12 +91,36 @@ public class CampManageController {
         }
     }
 
+    /**
+     * 수강생 조회
+     *
+     * @author 전석배,
+     */
+
     private void getAllStudents() {
         StudentList studentList = StudentList.getInstance();
         outputView.getAllStudents(studentList);
     }
-
+    /**
+     * 수강생 조회
+     *
+     * @author 송선호
+     */
     private void getStudentsByState() {
+        outputView.getStudentStateMessage();
+        selectStudentByState(State.GREEN);
+        selectStudentByState(State.YELLOW);
+        selectStudentByState(State.RED);
+    }
+
+    /**
+     * 수강생 조회
+     *
+     * @author 송선호
+     */
+    private void selectStudentByState(State state){
+        List<Student> studentsState = StudentList.getInstance().getStudentByState(state);
+        outputView.getStudentStateLi(studentsState,state);
     }
 
     /**
