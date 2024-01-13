@@ -12,6 +12,8 @@ public class StudentList {
     private static final StudentList INSTANCE = new StudentList();
     private static final int INDEX = 1;
 
+    private StudentList(){}
+
     public static StudentList getInstance() {
         return INSTANCE;
     }
