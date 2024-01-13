@@ -75,9 +75,28 @@ public class CampManageController {
         campManageService.createStudent(name, requireSubjects, optionalSubjects, inputView.state());
     }
 
-    // 수강생 조회
+    /**
+     * 수강생 조회
+     *
+     * @author 전석배,
+     */
     private void readStudent() {
-        StudentList.getInstance().getStudents();
+        // StudentList.getInstance().getStudents();
+        outputView.readStudent();
+        int readChoice = inputView.readStudent();
+        switch (readChoice) {
+            case 1 -> getAllStudents();
+            case 2 -> getStudentsByState();
+            case 3 -> outputView.backToManageMenu();
+        }
+    }
+
+    private void getAllStudents() {
+        StudentList studentList = StudentList.getInstance();
+        outputView.getAllStudents(studentList);
+    }
+
+    private void getStudentsByState() {
     }
 
     /**
@@ -121,6 +140,21 @@ public class CampManageController {
      * @author 전석배
      */
     private void deleteStudent() {
+        // 삭제할 고유번호 입력
+        outputView.deleteStudentId();
+        int studentId = inputView.deleteStudentId();
+
+        // 서비스
+        Student student = campManageService.getStudentByStudentId(studentId);
+
+        // 삭제 확인 여부 출력
+        outputView.isRealDelete(student);
+        int userDeleteChoice = inputView.userDeleteChoice();
+
+        if (userDeleteChoice == 1) {
+            campManageService.deleteStudent(student);
+            outputView.deleteCorrect();
+        }
 
     }
 

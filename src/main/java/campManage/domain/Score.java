@@ -3,6 +3,7 @@ package campManage.domain;
 import java.util.Map;
 
 public class Score {
+
     private final int subjectId;
     private Map<Integer, Integer> scorePerRound;
     private SubjectGrade subjectGrade;

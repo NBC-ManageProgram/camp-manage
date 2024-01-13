@@ -11,11 +11,11 @@ public class OutputView {
     public void manageMenu() {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "내일배움캠프 수강생 관리 프로그램 실행 중...\n" +
-                        "1. 수강생 관리\n" +
-                        "2. 점수 관리\n" +
-                        "3. 프로그램 종료\n" +
-                        "관리 항목을 선택하세요...");
+            "내일배움캠프 수강생 관리 프로그램 실행 중...\n" +
+                "1. 수강생 관리\n" +
+                "2. 점수 관리\n" +
+                "3. 프로그램 종료\n" +
+                "관리 항목을 선택하세요...");
     }
 
     public void manageStudent() {
@@ -121,4 +121,42 @@ public class OutputView {
         System.out.println("이전 메뉴로 돌아갑니다.");
     }
 
+
+    public void deleteStudentId() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 삭제할 고유번호를 입력하세요 ]]");
+    }
+
+    public void isRealDelete(Student student) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "\"[[ 삭제하시겠습니까? ]]\"\n"
+                + "\"|  " + student.getStudentId() + "  |  " + student.getName() + "  |  "
+                + student.getState() + "  |    " + student.getSubject() + "    |\"\n"
+                + "\"1. 삭제 2. 돌아가기\""
+        );
+    }
+
+    public void deleteCorrect() {
+        System.out.println("삭제가 완료되었습니다");
+    }
+
+    public void readStudent() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "\"1. 수강생 전체 정보 조회\"\n"
+                + "\"2. 수강생 상태별 수강생 목록 조회\"\n"
+                + "\"3. 돌아가기\""
+        );
+    }
+
+    public void getAllStudents(StudentList studentList) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "\"[[ 수강생 전체 정보  ]]\"\n"
+                + String.format("| %-4s | %-4s | %-7s | %-3s |",
+                "고유번호", "이름", "상태", "과목명")
+        );
+        studentList.getStudents();
+    }
 }

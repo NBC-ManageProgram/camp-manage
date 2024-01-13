@@ -165,7 +165,7 @@ public class InputView {
 
     private int validateManageStudentRange(int manageStudentNumber) {
         if (INPUT_START_RANGE <= manageStudentNumber
-                && manageStudentNumber <= MANAGE_STUDENT_END_RANGE) {
+            && manageStudentNumber <= MANAGE_STUDENT_END_RANGE) {
             return manageStudentNumber;
         }
         throw new IllegalArgumentException();
@@ -223,5 +223,44 @@ public class InputView {
         return Integer.parseInt(sc.nextLine());
     }
 
+    public int deleteStudentId() {
+        while (true) {
+            try {
+                int studentId = readUserInput();
+                StudentList studentList = StudentList.getInstance();
+                return studentList.validateStudentsId(studentId);
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 고유번호를 입력해주세요.");
+            }
+        }
+    }
 
+    public int userDeleteChoice() {
+        while (true) {
+            try {
+                int userDeleteChoice = readUserInput();
+                if (userDeleteChoice == 1 || userDeleteChoice == 2) {
+                    return userDeleteChoice;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 올바른 번호를 입력해주세요.");
+            }
+        }
+    }
+
+    public int readStudent() {
+        while (true) {
+            try {
+                int readChoice = readUserInput();
+                if (readChoice == 1 || readChoice == 2 || readChoice == 3) {
+                    return readChoice;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 1 이상 3 이하의 정수로 입력해주세요.");
+            }
+        }
+
+    }
 }
