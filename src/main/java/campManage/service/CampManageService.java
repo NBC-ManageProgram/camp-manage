@@ -22,12 +22,13 @@ public class CampManageService {
     }
 
     public void createStudent(String name, List<Subject> requireSubjects,
-            List<Subject> optionalSubjects, State state) {
+        List<Subject> optionalSubjects, State state) {
         requireSubjects.addAll(optionalSubjects);
         List<Score> scores = new ArrayList<>();
 
         studentList.add(new Student(1, name, requireSubjects, scores, state));
     }
+
 
     public void updateName(Student student, OutputView outputView, InputView inputView) {
         outputView.updateName(student);
@@ -44,5 +45,12 @@ public class CampManageService {
                 student.changeState(state);
             }
         }
+
+    public void deleteStudent(Student student) {
+        studentList.delete(student);
+    }
+
+    public Student getStudentByStudentId(int studentId) {
+        return StudentList.getInstance().getStudentByStudentId(studentId);
     }
 }
