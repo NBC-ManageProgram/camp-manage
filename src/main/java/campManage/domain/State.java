@@ -9,7 +9,7 @@ public enum State {
 
     public static State getStateByInput(int ordinal) {
         for (State state : State.values()) {
-            if (state.ordinal() == ordinal + STATE_INDEX) {
+            if (state.ordinal() + STATE_INDEX == ordinal) {
                 return state;
             }
         }

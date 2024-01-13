@@ -2,6 +2,7 @@ package campManage.view;
 
 import campManage.domain.Student;
 import campManage.domain.StudentList;
+import campManage.domain.Subject;
 
 public class OutputView {
 
@@ -117,10 +118,27 @@ public class OutputView {
         System.out.println("[ERROR] 수강생이 등록이 되어 있지 않습니다. 수강생 등록을 먼저 해주세요");
     }
 
+    public void createComplete() {
+        Student student = StudentList.getInstance().getLastStudents();
+
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 등록이 완료되었습니다. ]]");
+        System.out.printf("|  %d  |  %s  |  ", student.getStudentId(), student.getName());
+
+        student.getSubject().forEach(subject -> {
+            System.out.print(subject.getName());
+            if (student.getSubject().indexOf(subject) < student.getSubject().size() - 1) {
+                System.out.print(", ");
+            }
+        });
+
+        System.out.printf("  |  %s  |" + NEWLINE, student.getState());
+        System.out.printf("고유번호는 [ %d ] 번 입니다.", student.getStudentId());
+    }
+
     public void backToManageMenu() {
         System.out.println("이전 메뉴로 돌아갑니다.");
     }
-
 
     public void deleteStudentId() {
         System.out.println(SEPARATE_LINE);

@@ -62,8 +62,6 @@ public class CampManageController {
         outputView.createStudent();
         String name = inputView.name();
 
-        System.out.println(name);
-
         outputView.createRequireSubject();
         List<Subject> requireSubjects = inputView.requireSubject();
 
@@ -71,8 +69,10 @@ public class CampManageController {
         List<Subject> optionalSubjects = inputView.optionalSubject();
 
         outputView.createState();
+        State state = inputView.state();
 
-        campManageService.createStudent(name, requireSubjects, optionalSubjects, inputView.state());
+        campManageService.createStudent(name, requireSubjects, optionalSubjects, state);
+        outputView.createComplete();
     }
 
     /**
@@ -100,7 +100,7 @@ public class CampManageController {
     }
 
     /**
-     * 수강생 등록
+     * 수강생 수정
      *
      * @author 송선호
      */
