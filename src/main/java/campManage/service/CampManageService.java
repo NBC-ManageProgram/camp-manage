@@ -44,6 +44,7 @@ public class CampManageService {
                 student.changeState(state);
             }
         }
+    }
 
     public void deleteStudent(Student student) {
         studentList.delete(student);
