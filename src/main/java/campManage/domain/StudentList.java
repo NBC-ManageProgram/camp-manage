@@ -31,7 +31,7 @@ public class StudentList {
     public int getNextId() {
         return students.size() + INDEX;
     }
-  
+
     public Student checkStudent(int id) {
         for (Student studentCheck : students) {
             if (studentCheck.checkId(id)) {
@@ -50,17 +50,8 @@ public class StudentList {
 
     }
 
-    public void getStudents() {
-        for (Student student : students) {
-            System.out.format(
-                "| %-6s | %-4s | %-8s | ",
-                student.getStudentId(), student.getName(), student.getState()
-            );
-
-            String result = student.getSubject().stream().map(Subject::getName)
-                .collect(Collectors.joining(", "));
-            System.out.println(result + " |");
-        }
+    public List<Student> getStudents() {
+        return students;
     }
 
     public Student getStudentByStudentId(int studentId) {
