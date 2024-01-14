@@ -1,6 +1,8 @@
 package campManage.view;
 
+import campManage.domain.Score;
 import campManage.domain.State;
+import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
 import java.util.ArrayList;
@@ -192,16 +194,22 @@ public class InputView {
     public  int SelectedSubject(int size){
         while (true) {
             try {
-                int studentId = readUserInput();
-                if(studentId > 0 && studentId <= size){
-                    return studentId - 1;
+                int subjectID = readUserInput();
+                if(subjectID > 0 && subjectID <= size){
+                    return subjectID - 1;
                 }
                 throw new IllegalArgumentException();
             } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 잘못된 입력입니다. 유효한 고유번호를 입력해주세요.");
+                System.out.println("[ERROR] 잘못된 입력입니다. ");
             }
         }
 
     }
 
+
+
+    public int inputPerScore(){
+        int perscore = readUserInput();
+        return perscore;
+    }
 }

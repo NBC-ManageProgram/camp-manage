@@ -1,12 +1,16 @@
 package campManage.controller;
 
+import campManage.domain.Score;
+import campManage.domain.State;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
 import campManage.service.CampManageService;
 import campManage.view.InputView;
 import campManage.view.OutputView;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CampManageController {
 
@@ -134,6 +138,7 @@ public class CampManageController {
      * @author 이도연
      */
     private void createScore() {
+
         // 고유번호 입력하세요 출력
         outputView.inputStudentId();
         //검증한 고유번호 입력받기
@@ -141,15 +146,36 @@ public class CampManageController {
         //서비스
         Student student = campManageService.getStudentByStudentId(studentID);
 
+
         // 과목 입력하세요 출력
         outputView.ShowStudentName(student,student.getSubject());
-        //점수 입력할 과목 선택받기
+        //점수 입력할 과목 선택받기 student에 있는 인덱스 번호 (선택번호 -1)
         int selectedSubject = inputView.SelectedSubject(student.getSubject().size());
         //점수 입력하세요 출력
+
         outputView.createScore(student,selectedSubject);
 
+
+        int subjectScore = inputView.inputPerScore();
+        List<Integer> perScore = new ArrayList<>();
+        perScore.add(subjectScore);
+        student.addScore(new Score(selectedSubject,perScore));
+
+
+        int emptyRound = student.getScores().get(selectedSubject).isemptyScore(selectedSubject);
+        if (emptyRound != 0) {
+            System.out.println("과목 " + selectedSubject + "의 " + emptyRound + "회차가 비어있습니다. 점수를 입력하세요.");
+
+        } else {
+            System.out.println("과목 " + selectedSubject + "의 회차가 모두 채워져 있습니다.");
+        }
+
+
         //등록 완료
-        OutputView.createScoreComplete(student,selectedSubject);
+        OutputView.createScoreComplete(student,selectedSubject,subjectScore);
+
+
+
     }
 
     // 점수 조회

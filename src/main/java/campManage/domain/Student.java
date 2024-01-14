@@ -1,6 +1,7 @@
 package campManage.domain;
 
 import java.util.List;
+import javax.swing.ImageIcon;
 
 public class Student {
 
@@ -37,4 +38,9 @@ public class Student {
     public State getState() {
         return state;
     }
+
+    public void addScore(Score score){
+        scores.add(score);
+    }
+
 }

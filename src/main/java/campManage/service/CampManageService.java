@@ -35,4 +35,9 @@ public class CampManageService {
         return StudentList.getInstance().getStudentByStudentId(studentId);
     }
 
+    //public int getSelectedSubjectScore(Student student,List<Integer> perScore){
+        //List<Score> scores = perScore;
+        //return
+    //}
+
 }

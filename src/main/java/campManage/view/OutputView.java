@@ -1,5 +1,6 @@
 package campManage.view;
 
+import campManage.domain.Score;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
@@ -123,17 +124,18 @@ public class OutputView {
         System.out.println(SEPARATE_LINE);
         System.out.println(
             student.getStudentId() + "|" + student.getName() + "|" + student.getSubject()
-                .get(subjectIndex).getName() + "|");
-        System.out.println("[[ 회차를 입력하세요 ]]");
-
-        }
+                .get(subjectIndex).getName() + "|" );
+        System.out.println("[[ 점수를 입력하세요 ]]");
 
 
-    public static void createScoreComplete(Student student, int subjectIndex) {
+    }
+
+
+    public static void createScoreComplete(Student student, int subjectIndex, int subjectScore) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
             student.getStudentId() + "|" + student.getName() + "|" + student.getSubject()
-                .get(subjectIndex).getName() + "|회차|점수|등급");
+                .get(subjectIndex).getName() + "|"+student.getScores().get(0).getScorePerRoundSize()+"|" + subjectScore + "|등급");
 
     }
 }
