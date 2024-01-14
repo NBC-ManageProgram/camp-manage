@@ -3,6 +3,7 @@ package campManage.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class Student {
 
     private final int studentId;
@@ -51,6 +52,11 @@ public class Student {
         return state;
     }
 
+
+    public void addScore(Score score) {
+        scores.add(score);
+    }
+  
     public String getSubjectNames() {
         return subject.stream().map(Subject::getName)
             .collect(Collectors.joining(", "));

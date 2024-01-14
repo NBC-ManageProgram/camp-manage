@@ -1,5 +1,6 @@
 package campManage.view;
 
+import campManage.domain.Score;
 import campManage.domain.State;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
@@ -242,6 +243,40 @@ public class InputView {
         }
     }
 
+    // 학생 고유번호 검증 받고 가져오기
+    public int readStudentId() {
+        while (true) {
+            try {
+                int studentId = readUserInput();
+                StudentList studentList = StudentList.getInstance();
+                return studentList.validateStudentsId(studentId);
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 유효한 고유번호를 입력해주세요.");
+            }
+        }
+    }
+
+    // 점수 입력할 과목 선택받기
+    public int SelectedSubject(int size) {
+        while (true) {
+            try {
+                int subjectID = readUserInput();
+                if (subjectID > 0 && subjectID <= size) {
+                    return subjectID - 1;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. ");
+            }
+        }
+
+    }
+
+
+    public int inputPerScore() {
+        int perscore = readUserInput();
+        return perscore;
+    }
     public int readStudent() {
         while (true) {
             try {
@@ -277,5 +312,4 @@ public class InputView {
         }
         throw new IllegalArgumentException();
     }
-
 }
