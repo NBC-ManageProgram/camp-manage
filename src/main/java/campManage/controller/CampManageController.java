@@ -162,13 +162,8 @@ public class CampManageController {
         student.addScore(new Score(selectedSubject,perScore));
 
 
-        int emptyRound = student.getScores().get(selectedSubject).isemptyScore(selectedSubject);
-        if (emptyRound != 0) {
-            System.out.println("과목 " + selectedSubject + "의 " + emptyRound + "회차가 비어있습니다. 점수를 입력하세요.");
 
-        } else {
-            System.out.println("과목 " + selectedSubject + "의 회차가 모두 채워져 있습니다.");
-        }
+
 
 
         //등록 완료
