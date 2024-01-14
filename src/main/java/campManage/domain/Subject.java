@@ -45,6 +45,10 @@ public enum Subject {
         return name;
     }
 
+    public SubjectCategory getSubjectCategory(){
+        return subjectCategory;
+    }
+
 
 
 
