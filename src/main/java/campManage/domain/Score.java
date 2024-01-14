@@ -28,8 +28,8 @@ public class Score {
 
     public int getScorePerRoundSize() {
         return this.scorePerRound.size();
-    }
 
+    }
 
     public int isemptyScore(int subjectId) {
         for (int i = 1; i <= 10; i++) {
@@ -42,9 +42,9 @@ public class Score {
 
             }
         }
-
         return 0;
     }
-
-
+    public void setScorePerRound(int round, int score){
+        scorePerRound.set(round - 1, score);
+    }
 }

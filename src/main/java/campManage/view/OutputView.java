@@ -242,5 +242,46 @@ public class OutputView {
         );
         System.out.println(student.getSubjectNames() + " |");
     }
+    public void subjectSelect(Student student) {
+        System.out.println(SEPARATE_LINE);
+        ;
+        System.out.println("| " + student.getStudentId() + " |" + student.getName() + " |");
+        System.out.println("[[ 과목을 입력하세요. ]]");
+        for (int i = 0; i < student.getSubject().size(); i++) {
+            System.out.println((i + 1) + ". " + student.getSubject().get(i).getName());
+        }
+    }
+    public void roundSelect(Student student, int subject) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject()
+                .get(subject).getName() + " |");
+
+        try {
+            int round = student.getScores().get(0).getScorePerRound().size();
+            System.out.printf("총 회차 : %d\n", round);
+            System.out.println("[[ 회차를 입력하세요 ]]");
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("[ERROR] 회차를 수정할 수 없습니다. 다시 시험봐주세요");
+            //메인메뉴로 이동
+        }
+    }
+    public void updateScore(Student student, int subject, int subjectRound){
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject()
+                .get(subject).getName() + " | " + subjectRound + " |");
+        System.out.println("현재 점수 : " + student.getScores().get(subject).getScorePerRound().get(subjectRound - 1));
+        System.out.println("[[ 새로운 점수를 입력하세요 ]]");
+
+    }
+    public void successScore(Student student, int subject, int subjectRound, int subjectScore){
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject()
+                .get(subject).getName() + " | " + subjectRound + " | " + subjectScore + " |");
+        System.out.println("[[ 수정이 완료 되었습니다 ]]");
+
+    }
 
 }

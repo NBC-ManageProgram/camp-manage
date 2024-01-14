@@ -221,13 +221,13 @@ public class CampManageController {
 
         outputView.createScore(student, selectedSubject);
 
-        int subjectScore = inputView.inputPerScore();
-        List<Integer> perScore = new ArrayList<>();
-        perScore.add(subjectScore);
-        student.addScore(new Score(selectedSubject, perScore));
+        Score subjectScore = student.getSubjectScore(student, selectedSubject);
+        int inputsubjectScore = inputView.inputPerScore();
+        subjectScore.addScore(inputsubjectScore);
+
 
         //등록 완료
-        OutputView.createScoreComplete(student, selectedSubject, subjectScore);
+        OutputView.createScoreComplete(student, selectedSubject, inputsubjectScore);
 
 
     }
@@ -243,6 +243,29 @@ public class CampManageController {
      * @author 유경진
      */
     private void updateScore() {
+        //고유번호 입력
+        outputView.inputStudentId();
+        int id = inputView.deleteStudentId();   //  <-이름수정이 필요할듯(공용사용)
+        // 서비스
+        Student student = campManageService.getStudentByStudentId(id);
+        //과목입력
+        outputView.subjectSelect(student);
+        int subjectIndex = inputView.subjectSelect(student.getSubject().size()); //Subject에 들어온순서
+        int subjectId = student.getSubject().get(subjectIndex).ordinal();       //과목.ordinal
+        //회차입력
+        outputView.roundSelect(student, subjectIndex);
+        //System.out.println(student.getScores().get(subjectIndex).getScorePerRound().size());
+        int roundSize = student.getScores().get(subjectIndex).getScorePerRound().size();
+        int subjectRound = inputView.roundSelect(roundSize);
+        //점수입력
+        outputView.updateScore(student, subjectIndex, subjectRound);
+        int subjectScore = inputView.inputScore(); //새로받은 점수
+
+        System.out.println(student.getScores());
+        //점수 수정
+        student.getScores().get(subjectIndex).setScorePerRound(subjectRound, subjectScore);
+        //완...료
+        outputView.successScore(student, subjectIndex, subjectRound, subjectScore);
 
     }
 
