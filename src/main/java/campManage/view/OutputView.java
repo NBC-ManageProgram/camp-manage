@@ -1,9 +1,11 @@
 package campManage.view;
 
+
 import campManage.domain.Score;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
+import campManage.domain.State;
 import java.util.List;
 
 public class OutputView {
@@ -79,10 +81,83 @@ public class OutputView {
             "3. Red");
     }
 
+    public void updateId() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("\"[[ 수강생의 고유 번호를 입력해주세요 ]]\"");
+    }
+
+    public void updateList(Student student) {
+        String format = "|  %d  |  %s  |  %s  |\n";
+        System.out.println(SEPARATE_LINE);
+        System.out.printf(format, student.getStudentId(), student.getName(), student.getState());
+        System.out.println("\"1. 이름 정보 수정\"\n"
+            + "\"2. 상태 정보 수정\"\n"
+            + "\"3. 돌아가기\"");
+    }
+
+    public void updateName(Student student) {
+        String format = "|  %d  |  %s  |  %s  |\n";
+        System.out.println(SEPARATE_LINE);
+        System.out.printf(format, student.getStudentId(), student.getName(), student.getState());
+        System.out.println("\"[[ 수정할 이름을 입력해주세요 ]]\"");
+    }
+
+    public void updateState(Student student) {
+        String format = "|  %d  |  %s  |  %s  |\n";
+        System.out.println(SEPARATE_LINE);
+        System.out.printf(format, student.getStudentId(), student.getName(), student.getState());
+        System.out.println("\"1. Green\"\n"
+            + "\"2. Yellow\"\n"
+            + "\"3. Red\"");
+    }
+
+    public void updateComplete(Student student) {
+        String format = "|  %d  |  %s  |  %s  |\n";
+        System.out.println(SEPARATE_LINE);
+        System.out.println("\"[[수정이 완료되었습니다.]]\"");
+        System.out.printf(format, student.getStudentId(), student.getName(), student.getState());
+    }
+
+    public void checkIsEmpty() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[ERROR] 수강생이 등록이 되어 있지 않습니다. 수강생 등록을 먼저 해주세요");
+    }
+
+    public void createComplete() {
+        Student student = StudentList.getInstance().getLastStudents();
+
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 등록이 완료되었습니다. ]]");
+        System.out.printf("|  %d  |  %s  |  ", student.getStudentId(), student.getName());
+
+        student.getSubject().forEach(subject -> {
+            System.out.print(subject.getName());
+            if (student.getSubject().indexOf(subject) < student.getSubject().size() - 1) {
+                System.out.print(", ");
+            }
+        });
+
+        System.out.printf("  |  %s  |" + NEWLINE, student.getState());
+        System.out.printf("고유번호는 [ %d ] 번 입니다.", student.getStudentId());
+    }
+
     public void backToManageMenu() {
         System.out.println("이전 메뉴로 돌아갑니다.");
     }
 
+    public void getStudentStateMessage() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ 수강생 상태별 수강생 정보 ]]");
+    }
+
+    public void getStudentStateLi(List<Student> students, State state) {
+        System.out.println("[ " + state + " ]");
+        for (Student student : students) {
+            String format = "|  %d  |  %s  |\n";
+            System.out.printf(format, student.getStudentId(), student.getName());
+        }
+        System.out.println();
+    }
 
     public void deleteStudentId() {
         System.out.println(SEPARATE_LINE);
@@ -103,7 +178,6 @@ public class OutputView {
         System.out.println("삭제가 완료되었습니다");
     }
 
-    //이도연
     public void inputStudentId() {
         System.out.println(SEPARATE_LINE);
         System.out.println("[[ 고유번호를 입력하세요 ]]");
@@ -139,4 +213,34 @@ public class OutputView {
                 .getScorePerRoundSize() + "|" + subjectScore + "|등급");
 
     }
+
+    public void readStudent() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "\"1. 수강생 전체 정보 조회\"\n"
+                + "\"2. 수강생 상태별 수강생 목록 조회\"\n"
+                + "\"3. 돌아가기\""
+        );
+    }
+
+    public void getAllStudents(StudentList studentList) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "\"[[ 수강생 전체 정보  ]]\"\n"
+                + String.format("| %-4s | %-4s | %-7s | %-3s |",
+                "고유번호", "이름", "상태", "과목명")
+        );
+        for (Student student : studentList.getStudents()) {
+            displayStudent(student);
+        }
+    }
+
+    private void displayStudent(Student student) {
+        System.out.format(
+            "| %-6s | %-4s | %-8s | ",
+            student.getStudentId(), student.getName(), student.getState()
+        );
+        System.out.println(student.getSubjectNames() + " |");
+    }
+
 }

@@ -1,6 +1,7 @@
 package campManage.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class Student {
@@ -16,6 +17,18 @@ public class Student {
         this.name = name;
         this.subject = subject;
         this.scores = scores;
+        this.state = state;
+    }
+
+    public boolean checkId(int id) {
+        return this.studentId == id;
+    }
+
+    public void changeName(String name) {
+        this.name = name;
+    }
+
+    public void changeState(State state) {
         this.state = state;
     }
 
@@ -40,9 +53,12 @@ public class Student {
     }
 
 
-
     public void addScore(Score score) {
         scores.add(score);
     }
-
+  
+    public String getSubjectNames() {
+        return subject.stream().map(Subject::getName)
+            .collect(Collectors.joining(", "));
+    }
 }

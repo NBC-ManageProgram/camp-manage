@@ -24,7 +24,6 @@ public class CampManageController {
         this.outputView = new OutputView();
     }
 
-
     // 시작
     public void start() {
         while (true) {
@@ -43,7 +42,6 @@ public class CampManageController {
             case 3 -> System.exit(0);
         }
     }
-
 
     // 1. 수강생 관리
     private void manageStudent() {
@@ -67,8 +65,6 @@ public class CampManageController {
         outputView.createStudent();
         String name = inputView.name();
 
-        System.out.println(name);
-
         outputView.createRequireSubject();
         List<Subject> requireSubjects = inputView.requireSubject();
 
@@ -76,13 +72,59 @@ public class CampManageController {
         List<Subject> optionalSubjects = inputView.optionalSubject();
 
         outputView.createState();
+        State state = inputView.state();
 
-        campManageService.createStudent(name, requireSubjects, optionalSubjects, inputView.state());
+        campManageService.createStudent(name, requireSubjects, optionalSubjects, state);
+        outputView.createComplete();
     }
 
-    // 수강생 조회
+    /**
+     * 수강생 조회
+     *
+     * @author 전석배,
+     */
     private void readStudent() {
-        StudentList.getInstance().getStudents();
+        // StudentList.getInstance().getStudents();
+        outputView.readStudent();
+        int readChoice = inputView.readStudent();
+        switch (readChoice) {
+            case 1 -> getAllStudents();
+            case 2 -> getStudentsByState();
+            case 3 -> outputView.backToManageMenu();
+        }
+    }
+
+    /**
+     * 수강생 조회
+     *
+     * @author 전석배,
+     */
+
+    private void getAllStudents() {
+        StudentList studentList = StudentList.getInstance();
+        outputView.getAllStudents(studentList);
+    }
+
+    /**
+     * 수강생 조회
+     *
+     * @author 송선호
+     */
+    private void getStudentsByState() {
+        outputView.getStudentStateMessage();
+        selectStudentByState(State.GREEN);
+        selectStudentByState(State.YELLOW);
+        selectStudentByState(State.RED);
+    }
+
+    /**
+     * 수강생 조회
+     *
+     * @author 송선호
+     */
+    private void selectStudentByState(State state) {
+        List<Student> studentsState = StudentList.getInstance().getStudentByState(state);
+        outputView.getStudentStateLi(studentsState, state);
     }
 
     /**
@@ -91,8 +133,33 @@ public class CampManageController {
      * @author 송선호
      */
     private void updateStudent() {
-
+        if (StudentList.getInstance().getStudentsIsEmpty()) {
+            outputView.checkIsEmpty();
+        } else {
+            // 1. 수강생의 고유번호를 입력받는 화면 출력
+            outputView.updateId();
+            Student student = inputView.checkIdStudent();
+            // 2. 수강생 정보 수정 리스트 출력
+            outputView.updateList(student);
+            int updateSelectNumber = inputView.selectNumber();
+            switch (updateSelectNumber) {
+                // 3. 이름 수정시 출력
+                case 1 -> {
+                    campManageService.updateName(student, outputView, inputView);
+                    // 5. 수정 완료시 전체 정보 확인차 출력
+                    outputView.updateComplete(student);
+                }
+                // 4. 상태 수정시 출력
+                case 2 -> {
+                    campManageService.updateState(student, outputView, inputView);
+                    // 5. 수정 완료시 전체 정보 확인차 출력
+                    outputView.updateComplete(student);
+                }
+                case 3 -> outputView.backToManageMenu();
+            }
+        }
     }
+
 
     /**
      * 수강생 삭제
