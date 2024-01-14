@@ -36,8 +36,8 @@ public class CampManageService {
     }
 
     //public int getSelectedSubjectScore(Student student,List<Integer> perScore){
-        //List<Score> scores = perScore;
-        //return
+    //List<Score> scores = perScore;
+    //return
     //}
 
 }

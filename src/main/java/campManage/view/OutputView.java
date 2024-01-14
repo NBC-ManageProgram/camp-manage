@@ -124,7 +124,7 @@ public class OutputView {
         System.out.println(SEPARATE_LINE);
         System.out.println(
             student.getStudentId() + "|" + student.getName() + "|" + student.getSubject()
-                .get(subjectIndex).getName() + "|" );
+                .get(subjectIndex).getName() + "|");
         System.out.println("[[ 점수를 입력하세요 ]]");
 
 
@@ -135,7 +135,8 @@ public class OutputView {
         System.out.println(SEPARATE_LINE);
         System.out.println(
             student.getStudentId() + "|" + student.getName() + "|" + student.getSubject()
-                .get(subjectIndex).getName() + "|"+student.getScores().get(0).getScorePerRoundSize()+"|" + subjectScore + "|등급");
+                .get(subjectIndex).getName() + "|" + student.getScores().get(0)
+                .getScorePerRoundSize() + "|" + subjectScore + "|등급");
 
     }
 }

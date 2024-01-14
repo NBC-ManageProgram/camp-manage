@@ -190,12 +190,13 @@ public class InputView {
             }
         }
     }
+
     // 점수 입력할 과목 선택받기
-    public  int SelectedSubject(int size){
+    public int SelectedSubject(int size) {
         while (true) {
             try {
                 int subjectID = readUserInput();
-                if(subjectID > 0 && subjectID <= size){
+                if (subjectID > 0 && subjectID <= size) {
                     return subjectID - 1;
                 }
                 throw new IllegalArgumentException();
@@ -207,8 +208,7 @@ public class InputView {
     }
 
 
-
-    public int inputPerScore(){
+    public int inputPerScore() {
         int perscore = readUserInput();
         return perscore;
     }

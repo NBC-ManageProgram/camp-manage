@@ -25,10 +25,10 @@ public class Score {
     public void addScore(int score) {
         scorePerRound.add(score);
     }
-    public int getScorePerRoundSize(){
+
+    public int getScorePerRoundSize() {
         return this.scorePerRound.size();
     }
-
 
 
     public int isemptyScore(int subjectId) {

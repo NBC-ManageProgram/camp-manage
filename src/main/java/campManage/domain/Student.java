@@ -39,7 +39,7 @@ public class Student {
         return state;
     }
 
-    public void addScore(Score score){
+    public void addScore(Score score) {
         scores.add(score);
     }
 

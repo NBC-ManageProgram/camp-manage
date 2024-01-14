@@ -146,29 +146,21 @@ public class CampManageController {
         //서비스
         Student student = campManageService.getStudentByStudentId(studentID);
 
-
         // 과목 입력하세요 출력
-        outputView.ShowStudentName(student,student.getSubject());
+        outputView.ShowStudentName(student, student.getSubject());
         //점수 입력할 과목 선택받기 student에 있는 인덱스 번호 (선택번호 -1)
         int selectedSubject = inputView.SelectedSubject(student.getSubject().size());
         //점수 입력하세요 출력
 
-        outputView.createScore(student,selectedSubject);
-
+        outputView.createScore(student, selectedSubject);
 
         int subjectScore = inputView.inputPerScore();
         List<Integer> perScore = new ArrayList<>();
         perScore.add(subjectScore);
-        student.addScore(new Score(selectedSubject,perScore));
-
-
-
-
-
+        student.addScore(new Score(selectedSubject, perScore));
 
         //등록 완료
-        OutputView.createScoreComplete(student,selectedSubject,subjectScore);
-
+        OutputView.createScoreComplete(student, selectedSubject, subjectScore);
 
 
     }
