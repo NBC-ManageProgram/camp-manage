@@ -22,7 +22,7 @@ public class CampManageService {
     }
 
     public void createStudent(String name, List<Subject> requireSubjects,
-        List<Subject> optionalSubjects, State state) {
+            List<Subject> optionalSubjects, State state) {
         requireSubjects.addAll(optionalSubjects);
         List<Score> scores = new ArrayList<>();
         studentList.add(new Student(studentList.getNextId(), name, requireSubjects, scores, state));
@@ -67,7 +67,7 @@ public class CampManageService {
         }
         // 해당 과목에 대한 성적이 없는 경우 새로운 성적 생성 후 반환
         Score newScore = new Score(selectedSubject.getSubjectId(), new ArrayList<>(),
-            new ArrayList<>());
+                new ArrayList<>());
         student.addScore(newScore); // 생성한 성적을 학생에게 추가
         return newScore;
     }
@@ -81,6 +81,18 @@ public class CampManageService {
         }
         return grade;
     }
+
+    public void handleScoreCreation(Score subjectScore, int inputSubjectScore,
+        SubjectGrade grade) {
+
+        if (subjectScore.getScorePerRoundSize() >= 10) {
+            throw new RuntimeException();
+        } else {
+            subjectScore.addScore(inputSubjectScore);
+            subjectScore.addGrade(grade);
+        }
+    }
+
 
 
     public int getScoreIndex(Student student, int subjectId) {

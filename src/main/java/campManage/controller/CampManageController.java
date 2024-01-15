@@ -223,18 +223,17 @@ public class CampManageController {
         int inputSubjectScore = inputView.inputPerScore();
 
         SubjectGrade grade = campManageService.getSubjectGrade(student, inputSubjectScore,
-            selectedSubject);
-
-        if (subjectScore.getScorePerRoundSize() >= 10) {
-            System.out.println("[ERROR] 10회 이상의 입력은 불가능합니다.");
-        } else {
-            subjectScore.addScore(inputSubjectScore);
-            subjectScore.addGrade(grade);
-            OutputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
+                selectedSubject);
+        try {
+            campManageService.handleScoreCreation(subjectScore, inputSubjectScore, grade);
+            outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
                 grade);
+        } catch (RuntimeException e) {
+            outputView.roundSizeError();
         }
 
     }
+
 
     /**
      * 점수 조회
@@ -251,8 +250,24 @@ public class CampManageController {
             case 4 -> outputView.backToManageMenu();
 
         }
-
     }
+
+    /**
+     * 점수 조회
+     *
+     * @author 송선호
+     */
+    private void readStudentByState() {
+        if (StudentList.getInstance().checkStudentScoreIsEmpty()) {
+            outputView.checkStudentScoreIsEmpty();
+        } else {
+            outputView.readStudentByState();
+            State state = inputView.selectState();
+            List<Student> students = StudentList.getInstance().getStudentBySpecificState(state);
+            outputView.readStudentBySpecificState(students);
+        }
+    }
+
 
     /**
      * 수강생의 특정 과목 회차별 등급 조회
@@ -294,14 +309,18 @@ public class CampManageController {
         } else {
             int roundSize = student.getScores().get(scoreIndex).getScorePerRound().size();
             //회차입력
-            outputView.roundSelect(student, subjectIndex);
+            outputView.roundSelect(student, scoreIndex, subjectIndex);
             int subjectRound = inputView.roundSelect(roundSize);
 
             //점수입력
-            outputView.updateScore(student, subjectIndex, subjectRound);
+            outputView.updateScore(student, subjectIndex, subjectRound, scoreIndex);
             int subjectScore = inputView.inputScore(); //새로받은 점수
+            SubjectGrade grade = campManageService.getSubjectGrade(student, subjectScore,
+                subjectIndex);
             //점수 수정
-            student.getScores().get(scoreIndex).setScorePerRound(subjectRound, subjectScore);
+            student.getScores().get(scoreIndex)
+                .setScorePerRound(subjectRound, subjectScore, subjectId, grade);
+
             //완...료
             outputView.successScore(student, subjectIndex, subjectRound, subjectScore);
         }
