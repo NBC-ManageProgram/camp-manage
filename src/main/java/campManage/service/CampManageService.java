@@ -94,16 +94,16 @@ public class CampManageService {
             subjectScore.addGrade(grade);
         }
     }
-    public int avgScore(Student student, int scoreIndex){
+
+    public int avgScore(Student student, int scoreIndex) {
         int sumScore = 0, avgScore = 0;
         int scoreSize = student.getScores().get(scoreIndex).getScorePerRound().size();
-        for(int i = 0; i < scoreSize; i++){
+        for (int i = 0; i < scoreSize; i++) {
             sumScore = sumScore + student.getScores().get(scoreIndex).getScorePerRound().get(i);
         }
-        avgScore = sumScore / scoreSize ;
+        avgScore = sumScore / scoreSize;
         return avgScore;
     }
-
 
 
     public int getScoreIndex(Student student, int subjectId) {
