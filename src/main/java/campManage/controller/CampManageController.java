@@ -229,8 +229,9 @@ public class CampManageController {
             selectedSubject);
 
         try {
-            campManageService.handleScoreCreation(subjectScore, inputSubjectScore,grade);
-            outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound, grade);
+            campManageService.handleScoreCreation(subjectScore, inputSubjectScore, grade);
+            outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
+                grade);
         } catch (RuntimeException e) {
             outputView.roundSizeError();
         }
