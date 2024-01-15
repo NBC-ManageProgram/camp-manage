@@ -12,7 +12,8 @@ public class StudentList {
     private static final StudentList INSTANCE = new StudentList();
     private static final int INDEX = 1;
 
-    private StudentList(){}
+    private StudentList() {
+    }
 
     public static StudentList getInstance() {
         return INSTANCE;
@@ -57,14 +58,14 @@ public class StudentList {
 
     public Student getStudentByStudentId(int studentId) {
         return students.stream()
-                .filter(student -> student.getStudentId() == studentId)
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+            .filter(student -> student.getStudentId() == studentId)
+            .findFirst()
+            .orElseThrow(IllegalArgumentException::new);
     }
 
     public int validateStudentsId(int studentId) { // return int
         boolean validate = students.stream()
-                .anyMatch(student -> student.getStudentId() == studentId);
+            .anyMatch(student -> student.getStudentId() == studentId);
         if (validate) {
             return studentId;
         }

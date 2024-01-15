@@ -332,4 +332,37 @@ public class InputView {
         throw new IllegalArgumentException();
     }
 
+    public int subjectSelect(int size) {
+        while (true) {
+            try {
+                int subjectId = readUserInput();
+                if (subjectId > 0 && subjectId <= size) {
+                    return subjectId - 1;
+                } //그냥 인덱스값으로 ,,,
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 과목번호를 입력해주세요.");
+            }
+        }
+    }
+  
+    public int roundSelect(int roundSize){
+        while (true) {
+            try {
+                int round = readUserInput();
+                if(round > 0 || round < roundSize){
+                    return round;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 회차를 입력해주세요.");
+            }
+        }
+    }
+  
+    public int inputScore(){
+        int score = readUserInput();
+        return score;
+    }
+
 }
