@@ -29,6 +29,7 @@ public class InputView {
     private static final String UPDATE_INPUT_MESSAGE = "[ERROR] 잘못된 입력입니다. 유효한 고유번호를 입력해주세요.";
 
     private static final int INPUT_START_RANGE = 1;
+    private static final int INDEX_CHECK = 1;
     private static final int MANAGE_MENU_END_RANGE = 3;
     private static final int MANAGE_STUDENT_END_RANGE = 5;
     private static final int MANAGE_SCORE_END_RANGE = 4;
@@ -50,7 +51,7 @@ public class InputView {
     }
 
     public List<Subject> readSubjects(Consumer<String> consumer,
-        Function<Integer, Subject> function, String errorMessage) {
+            Function<Integer, Subject> function, String errorMessage) {
         while (true) {
             List<Subject> subjects = new ArrayList<>();
             try {
@@ -121,13 +122,13 @@ public class InputView {
     public List<Subject> requireSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getRequireSubjectByOrdinal;
         return readSubjects(this::validateRequireSubject, subjectMapper,
-            REQUIRE_SUBJECT_ERROR_MESSAGE);
+                REQUIRE_SUBJECT_ERROR_MESSAGE);
     }
 
     public List<Subject> optionalSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getOptionalSubjectByOrdinal;
         return readSubjects(this::validateOptionalSubject, subjectMapper,
-            OPTIONAL_SUBJECT_ERROR_MESSAGE);
+                OPTIONAL_SUBJECT_ERROR_MESSAGE);
     }
 
 
@@ -140,7 +141,7 @@ public class InputView {
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(
-                    "[ERROR] 잘못된 입력입니다. 수정 전 이름과 다르게 입력하거나, 공백을 제외한 2글자 이상 10글자 이하로 입력해주세요");
+                        "[ERROR] 잘못된 입력입니다. 수정 전 이름과 다르게 입력하거나, 공백을 제외한 2글자 이상 10글자 이하로 입력해주세요");
             }
         }
     }
@@ -178,6 +179,7 @@ public class InputView {
             }
         }
     }
+
 
     private int validateManageMenuRange(int manageMenuNumber) {
         return validateRange(manageMenuNumber, MANAGE_MENU_END_RANGE);
@@ -324,7 +326,7 @@ public class InputView {
 
     private int validateUpdateSelectRange(int updateSelectNumber) {
         if (INPUT_START_RANGE <= updateSelectNumber
-            && updateSelectNumber <= MANAGE_MENU_END_RANGE) {
+                && updateSelectNumber <= MANAGE_MENU_END_RANGE) {
             return updateSelectNumber;
         }
         throw new IllegalArgumentException();
@@ -372,5 +374,18 @@ public class InputView {
         }
     }
 
-
+    public State selectState() {
+        while (true) {
+            try {
+                int stateOrdinal = validateUpdateSelectRange(readUserInput());
+                for (State value : State.values()) {
+                    if (value.ordinal() == stateOrdinal - INDEX_CHECK) {
+                        return value;
+                    }
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 유효한 고유번호를 입력해 주세요.");
+            }
+        }
+    }
 }
