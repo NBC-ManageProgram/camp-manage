@@ -273,19 +273,19 @@ public class CampManageController {
         } else {
             int roundSize = student.getScores().get(scoreIndex).getScorePerRound().size();
             //회차입력
-            outputView.roundSelect(student, subjectIndex);
+            outputView.roundSelect(student, scoreIndex, subjectIndex);
             int subjectRound = inputView.roundSelect(roundSize);
 
             //점수입력
-            outputView.updateScore(student, subjectIndex, subjectRound);
+            outputView.updateScore(student, subjectIndex, subjectRound, scoreIndex);
             int subjectScore = inputView.inputScore(); //새로받은 점수
+
             //점수 수정
             student.getScores().get(scoreIndex).setScorePerRound(subjectRound, subjectScore);
+
             //완...료
             outputView.successScore(student, subjectIndex, subjectRound, subjectScore);
         }
-
-
     }
 }
 
