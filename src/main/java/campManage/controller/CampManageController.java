@@ -279,9 +279,11 @@ public class CampManageController {
             //점수입력
             outputView.updateScore(student, subjectIndex, subjectRound, scoreIndex);
             int subjectScore = inputView.inputScore(); //새로받은 점수
-
+            SubjectGrade grade = campManageService.getSubjectGrade(student, subjectScore,
+                subjectIndex);
             //점수 수정
-            student.getScores().get(scoreIndex).setScorePerRound(subjectRound, subjectScore);
+            student.getScores().get(scoreIndex)
+                .setScorePerRound(subjectRound, subjectScore, subjectId, grade);
 
             //완...료
             outputView.successScore(student, subjectIndex, subjectRound, subjectScore);

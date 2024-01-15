@@ -23,6 +23,10 @@ public class Score {
         return scorePerRound;
     }
 
+    public List<SubjectGrade> getGradePerRound() {
+        return gradePerRound;
+    }
+
     public void addScore(int score) {
         scorePerRound.add(score);
     }
@@ -49,7 +53,8 @@ public class Score {
         return 11;
     }
 
-    public void setScorePerRound(int round, int score) {
+    public void setScorePerRound(int round, int score, int subjectId, SubjectGrade grade) {
         scorePerRound.set(round - 1, score);
+        gradePerRound.set(round - 1, grade);
     }
 }

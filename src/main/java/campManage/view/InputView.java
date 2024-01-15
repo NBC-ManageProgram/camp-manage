@@ -20,12 +20,10 @@ public class InputView {
     private static final String NAME_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 공백을 제외한 2글자 이상 10글자 이하의 한글로 입력해 주세요.";
 
     private static final String REQUIRE_SUBJECT_ERROR_MESSAGE =
-        "[ERROR] 잘못된 입력입니다. 1 이상 5 이하의 정수로 서로 다른 3개 이상의 필수 과목을 선택해주세요.\n" +
-            "각 과목은 공백으로 구분되어야 합니다.";
+        "[ERROR] 잘못된 입력입니다. 1 이상 5 이하의 정수로 서로 다른 3개 이상의 필수 과목을 선택해주세요.\n" + "각 과목은 공백으로 구분되어야 합니다.";
 
     private static final String OPTIONAL_SUBJECT_ERROR_MESSAGE =
-        "[ERROR] 잘못된 입력입니다. 1 이상 4 이하의 정수로 서로 다른 2개 이상의 선택 과목을 선택해주세요.\n" +
-            "각 과목은 공백으로 구분되어야 합니다.";
+        "[ERROR] 잘못된 입력입니다. 1 이상 4 이하의 정수로 서로 다른 2개 이상의 선택 과목을 선택해주세요.\n" + "각 과목은 공백으로 구분되어야 합니다.";
 
     private static final String STATE_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 1 이상 3 이하의 정수로 입력해주세요.";
     private static final String UPDATE_INPUT_MESSAGE = "[ERROR] 잘못된 입력입니다. 유효한 고유번호를 입력해주세요.";
