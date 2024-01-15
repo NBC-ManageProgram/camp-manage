@@ -5,14 +5,11 @@ import campManage.domain.State;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
-import campManage.domain.SubjectCategory;
 import campManage.domain.SubjectGrade;
 import campManage.service.CampManageService;
 import campManage.view.InputView;
 import campManage.view.OutputView;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class CampManageController {
 
@@ -226,7 +223,7 @@ public class CampManageController {
         int inputSubjectScore = inputView.inputPerScore();
 
         SubjectGrade grade = campManageService.getSubjectGrade(student, inputSubjectScore,
-                selectedSubject);
+            selectedSubject);
         try {
             campManageService.handleScoreCreation(subjectScore, inputSubjectScore, grade);
             outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
@@ -238,15 +235,20 @@ public class CampManageController {
     }
 
 
-    // 점수 조회
+    /**
+     * 점수 조회
+     *
+     * @author 손준형
+     */
     private void readScore() {
         outputView.manageReadScore();
         int manageReadScore = inputView.manageReadScore();
         switch (manageReadScore) {
-            case 1 -> System.out.println("수강생의 특정 과목 회차별 등급을 조회");
+            case 1 -> readSubjectGradeByStudent();
             case 2 -> readStudentByState();
             case 3 -> readAvgGrade();
             case 4 -> outputView.backToManageMenu();
+
         }
     }
 
@@ -293,6 +295,26 @@ public class CampManageController {
     }
 
     /**
+     * 수강생의 특정 과목 회차별 등급 조회
+     *
+     * @author 손준형
+     */
+    private void readSubjectGradeByStudent() {
+        outputView.readStudentId();
+        int studentId = inputView.readStudentId();
+        Student student = campManageService.getStudentByStudentId(studentId);
+        outputView.readSubject(student);
+        int subjectId = inputView.readSubjectIdByStudentId(student);
+
+        try {
+            Score score = campManageService.hasScore(student, subjectId);
+            outputView.readSubjectGradeByStudent(score);
+        } catch (IllegalArgumentException ignored) {
+        }
+
+    }
+
+    /**
      * 점수 수정
      *
      * @author 유경진
@@ -327,6 +349,8 @@ public class CampManageController {
             //완...료
             outputView.successScore(student, subjectIndex, subjectRound, subjectScore);
         }
+
+
     }
 }
 

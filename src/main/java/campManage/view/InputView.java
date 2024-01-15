@@ -1,11 +1,9 @@
 package campManage.view;
 
-import campManage.domain.Score;
 import campManage.domain.State;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
-import campManage.service.CampManageService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,7 +49,7 @@ public class InputView {
     }
 
     public List<Subject> readSubjects(Consumer<String> consumer,
-            Function<Integer, Subject> function, String errorMessage) {
+        Function<Integer, Subject> function, String errorMessage) {
         while (true) {
             List<Subject> subjects = new ArrayList<>();
             try {
@@ -100,7 +98,6 @@ public class InputView {
         return getInputWithValidation(this::validateManageReadScoreRange, INPUT_ERROR_MESSAGE);
     }
 
-
     public State state() {
         Function<Integer, State> stateMapper = State::getStateByInput;
         return getInputWithValidation(stateMapper, STATE_ERROR_MESSAGE);
@@ -119,16 +116,27 @@ public class InputView {
         }
     }
 
+    public int readSubjectIdByStudentId(Student student) {
+        while (true) {
+            try {
+                int input = readUserInput();
+                return validateSubjectRange(student, input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(INPUT_ERROR_MESSAGE);
+            }
+        }
+    }
+
     public List<Subject> requireSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getRequireSubjectByOrdinal;
         return readSubjects(this::validateRequireSubject, subjectMapper,
-                REQUIRE_SUBJECT_ERROR_MESSAGE);
+            REQUIRE_SUBJECT_ERROR_MESSAGE);
     }
 
     public List<Subject> optionalSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getOptionalSubjectByOrdinal;
         return readSubjects(this::validateOptionalSubject, subjectMapper,
-                OPTIONAL_SUBJECT_ERROR_MESSAGE);
+            OPTIONAL_SUBJECT_ERROR_MESSAGE);
     }
 
 
@@ -141,7 +149,7 @@ public class InputView {
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(
-                        "[ERROR] 잘못된 입력입니다. 수정 전 이름과 다르게 입력하거나, 공백을 제외한 2글자 이상 10글자 이하로 입력해주세요");
+                    "[ERROR] 잘못된 입력입니다. 수정 전 이름과 다르게 입력하거나, 공백을 제외한 2글자 이상 10글자 이하로 입력해주세요");
             }
         }
     }
@@ -195,6 +203,10 @@ public class InputView {
 
     private int validateManageReadScoreRange(int manageReadScore) {
         return validateRange(manageReadScore, MANAGE_READ_SCORE_END_RANGE);
+    }
+
+    private int validateSubjectRange(Student student, int subjectId) {
+        return validateRange(subjectId, student.getSubject().size());
     }
 
     private void validateIsDuplicate(List<String> subjectNumbers) {
@@ -326,7 +338,7 @@ public class InputView {
 
     private int validateUpdateSelectRange(int updateSelectNumber) {
         if (INPUT_START_RANGE <= updateSelectNumber
-                && updateSelectNumber <= MANAGE_MENU_END_RANGE) {
+            && updateSelectNumber <= MANAGE_MENU_END_RANGE) {
             return updateSelectNumber;
         }
         throw new IllegalArgumentException();

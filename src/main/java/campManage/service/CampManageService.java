@@ -14,9 +14,9 @@ import java.util.List;
 
 public class CampManageService {
 
-    //    private final Student student;
-//    private final Score score;
-//    private final Subject subject;
+    private static final String SCORE_ERROR_MESSAGE = "[ERROR] 아직 한번도 시험을 보지 않은 과목입니다.";
+    private static final int INDEX = 1;
+
     private final StudentList studentList;
 
     public CampManageService() {
@@ -24,7 +24,7 @@ public class CampManageService {
     }
 
     public void createStudent(String name, List<Subject> requireSubjects,
-            List<Subject> optionalSubjects, State state) {
+        List<Subject> optionalSubjects, State state) {
         requireSubjects.addAll(optionalSubjects);
         List<Score> scores = new ArrayList<>();
         studentList.add(new Student(studentList.getNextId(), name, requireSubjects, scores, state));
@@ -69,7 +69,7 @@ public class CampManageService {
         }
         // 해당 과목에 대한 성적이 없는 경우 새로운 성적 생성 후 반환
         Score newScore = new Score(selectedSubject.getSubjectId(), new ArrayList<>(),
-                new ArrayList<>());
+            new ArrayList<>());
         student.addScore(newScore); // 생성한 성적을 학생에게 추가
         return newScore;
     }
@@ -114,5 +114,19 @@ public class CampManageService {
             }
         }
         return index;
+    }
+
+    public Score hasScore(Student student, int subjectId) {
+        List<Score> scores = student.getScores();
+
+        Subject selectedSubject = student.getSubject().get(subjectId - INDEX);
+
+        for (Score score : scores) {
+            if (score.getSubjectId() == selectedSubject.getSubjectId()) {
+                return score;
+            }
+        }
+        System.out.println(SCORE_ERROR_MESSAGE);
+        throw new IllegalArgumentException();
     }
 }
