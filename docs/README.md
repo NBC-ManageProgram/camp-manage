@@ -5,6 +5,8 @@
 + 내배캠 스프링 수강생들을 관리하는 프로그램
 ---
 
+# 📈 다이어그램
+![campManage](https://github.com/NBC-ManageProgram/camp-manage/assets/109019081/80215349-f415-45aa-8fca-78f6edd9020f)
 
 # 📚 기능 목록
 
