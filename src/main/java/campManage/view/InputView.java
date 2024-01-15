@@ -181,6 +181,8 @@ public class InputView {
         }
     }
 
+
+
     private int validateManageMenuRange(int manageMenuNumber) {
         return validateRange(manageMenuNumber, MANAGE_MENU_END_RANGE);
     }
@@ -363,6 +365,21 @@ public class InputView {
     public int inputScore(){
         int score = readUserInput();
         return score;
+    }
+
+    public State selectState(){
+        while(true){
+            try{
+                int stateOrdinal = validateUpdateSelectRange(readUserInput());
+                for (State value : State.values()) {
+                    if(value.ordinal() == stateOrdinal){
+                        return value;
+                    }
+                }
+            }catch(IllegalArgumentException e){
+                System.out.println("[ERROR] 유효한 고유번호를 입력해 주세요.");
+            }
+        }
     }
 
 }

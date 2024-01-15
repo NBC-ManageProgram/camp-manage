@@ -63,6 +63,10 @@ public class StudentList {
             .orElseThrow(IllegalArgumentException::new);
     }
 
+    public List<Student> getStudentBySpecificState(State state){
+        return students.stream().filter(e -> e.getState() == state).collect(Collectors.toList());
+    }
+
     public int validateStudentsId(int studentId) { // return int
         boolean validate = students.stream()
             .anyMatch(student -> student.getStudentId() == studentId);

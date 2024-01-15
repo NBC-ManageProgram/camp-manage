@@ -226,7 +226,7 @@ public class CampManageController {
         int inputSubjectScore = inputView.inputPerScore();
 
         SubjectGrade grade = campManageService.getSubjectGrade(student, inputSubjectScore,
-            selectedSubject);
+                selectedSubject);
 
         if (subjectScore.getScorePerRoundSize() >= 10) {
             System.out.println("[ERROR] 10회 이상의 입력은 불가능합니다.");
@@ -234,7 +234,7 @@ public class CampManageController {
             subjectScore.addScore(inputSubjectScore);
             subjectScore.addGrade(grade);
             OutputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
-                grade);
+                    grade);
         }
 
     }
@@ -245,13 +245,26 @@ public class CampManageController {
         int manageReadScore = inputView.manageReadScore();
         switch (manageReadScore) {
             case 1 -> System.out.println("수강생의 특정 과목 회차별 등급을 조회");
-            case 2 -> System.out.println("특정 상태 수강생들의 필수 과목별 평균 등급 조회");
+            case 2 -> readStudentByState();
             case 3 -> System.out.println("수강생의 과목별 평균 등급 조회");
             case 4 -> outputView.backToManageMenu();
-
         }
-
     }
+
+    /**
+     * 점수 조회
+     *
+     * @author 송선호
+     */
+
+
+    private void readStudentByState() {
+        outputView.readStudentByState();
+        State state = inputView.selectState();
+        List<Student> students = StudentList.getInstance().getStudentBySpecificState(state);
+        outputView.readStudentBySpecificState(students);
+    }
+
 
     /**
      * 점수 수정
@@ -284,8 +297,6 @@ public class CampManageController {
             //완...료
             outputView.successScore(student, subjectIndex, subjectRound, subjectScore);
         }
-
-
     }
 }
 
