@@ -85,10 +85,10 @@ public class CampManageService {
     }
 
 
-    public int getScoreIndex(Student student, int subjectId){
+    public int getScoreIndex(Student student, int subjectId) {
         int index = 10;
-        for(int i = 0; i < student.getScores().size(); i++){
-            if(student.getScores().get(i).getSubjectId() == subjectId){
+        for (int i = 0; i < student.getScores().size(); i++) {
+            if (student.getScores().get(i).getSubjectId() == subjectId) {
                 index = i;
             }
         }
