@@ -208,13 +208,11 @@ public class CampManageController {
 
         // 고유번호 입력하세요 출력
         outputView.inputStudentId();
-        //검증한 고유번호 입력받기
         int studentID = inputView.readStudentId();
         Student student = campManageService.getStudentByStudentId(studentID);
 
         // 과목 입력하세요 출력
         outputView.ShowStudentName(student, student.getSubject());
-        //점수 입력할 과목 선택받기
         int selectedSubject = inputView.SelectedSubject(student.getSubject().size());
         Score subjectScore = campManageService.getSubjectScore(student, selectedSubject);
 
@@ -226,13 +224,11 @@ public class CampManageController {
         SubjectGrade grade = campManageService.getSubjectGrade(student, inputSubjectScore,
             selectedSubject);
 
-        if (subjectScore.getScorePerRoundSize() >= 10) {
-            System.out.println("[ERROR] 10회 이상의 입력은 불가능합니다.");
-        } else {
-            subjectScore.addScore(inputSubjectScore);
-            subjectScore.addGrade(grade);
-        OutputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
-            grade);
+        try {
+            campManageService.handleScoreCreation(subjectScore, inputSubjectScore, grade);
+            outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound, grade);
+        } catch (RuntimeException e) {
+            outputView.roundSizeError();
         }
 
     }

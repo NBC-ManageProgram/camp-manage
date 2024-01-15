@@ -84,5 +84,16 @@ public class CampManageService {
         return grade;
     }
 
+    public void handleScoreCreation(Score subjectScore, int inputSubjectScore,
+        SubjectGrade grade) {
+
+        if (subjectScore.getScorePerRoundSize() >= 10) {
+            throw new RuntimeException();
+        } else {
+            subjectScore.addScore(inputSubjectScore);
+            subjectScore.addGrade(grade);
+        }
+    }
+
 
 }
