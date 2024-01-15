@@ -228,7 +228,6 @@ public class CampManageController {
 
         if (subjectScore.getScorePerRoundSize() >= 10) {
             System.out.println("[ERROR] 10회 이상의 입력은 불가능합니다.");
-            createScore();
         } else {
             subjectScore.addScore(inputSubjectScore);
             subjectScore.addGrade(grade);
