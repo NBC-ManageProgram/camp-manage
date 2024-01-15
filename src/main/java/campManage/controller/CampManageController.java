@@ -259,7 +259,7 @@ public class CampManageController {
      *
      * @author 유경진
      */
-    private void readAvgGrade(){
+    private void readAvgGrade() {
         outputView.inputStudentId();
         int id = inputView.deleteStudentId();
         // 서비스
@@ -267,13 +267,14 @@ public class CampManageController {
         //학생정보 출력
         outputView.showAvgStudent(student);
         // 서비스
-        for(int i = 0; i < student.getSubject().size(); i++){
+        for (int i = 0; i < student.getSubject().size(); i++) {
             int subjectId = student.getSubject().get(i).ordinal();       //과목.ordinal
             int scoreIndex = campManageService.getScoreIndex(student, subjectId);   //그 과목 인덱스 찾기
-            if(scoreIndex < 10) {
-                System.out.println(student.getSubject().get(i).getName() + " | " + campManageService.getSubjectGrade(student, campManageService.avgScore(student, scoreIndex), i));
-            }
-            else{
+            if (scoreIndex < 10) {
+                System.out.println(student.getSubject().get(i).getName() + " | "
+                    + campManageService.getSubjectGrade(student,
+                    campManageService.avgScore(student, scoreIndex), i));
+            } else {
                 System.out.println(student.getSubject().get(i).getName() + " | 점수가 없습니다.");
             }
         }
