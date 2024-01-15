@@ -17,34 +17,34 @@ public class OutputView {
     public void manageMenu() {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "내일배움캠프 수강생 관리 프로그램 실행 중...\n" +
-                        "1. 수강생 관리\n" +
-                        "2. 점수 관리\n" +
-                        "3. 프로그램 종료\n" +
-                        "관리 항목을 선택하세요...");
+            "내일배움캠프 수강생 관리 프로그램 실행 중...\n" +
+                "1. 수강생 관리\n" +
+                "2. 점수 관리\n" +
+                "3. 프로그램 종료\n" +
+                "관리 항목을 선택하세요...");
     }
 
     public void manageStudent() {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "1. 수강생 등록\n" +
-                        "2. 수강생 조회\n" +
-                        "3. 수강생 수정\n" +
-                        "4. 수강생 삭제\n" +
-                        "5. 돌아가기\n" +
+            "1. 수강생 등록\n" +
+                "2. 수강생 조회\n" +
+                "3. 수강생 수정\n" +
+                "4. 수강생 삭제\n" +
+                "5. 돌아가기\n" +
 
-                        "관리 항목을 선택하세요...");
+                "관리 항목을 선택하세요...");
     }
 
     public void manageScore() {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "1. 점수 등록\n" +
-                        "2. 점수 조회\n" +
-                        "3. 점수 수정\n" +
-                        "4. 돌아가기\n" +
+            "1. 점수 등록\n" +
+                "2. 점수 조회\n" +
+                "3. 점수 수정\n" +
+                "4. 돌아가기\n" +
 
-                        "관리 항목을 선택하세요...");
+                "관리 항목을 선택하세요...");
     }
 
     public void createStudent() {
@@ -55,30 +55,30 @@ public class OutputView {
     public void createRequireSubject() {
         System.out.println(SEPARATE_LINE);
         System.out.println("[[ 필수 과목을 3개 이상 선택해주세요. ]]\n" +
-                "((ex) 1 2 3)\n" +
-                "1. Java\n" +
-                "2. 객체지향\n" +
-                "3. Spring\n" +
-                "4. JPA\n" +
-                "5. MYSQL");
+            "((ex) 1 2 3)\n" +
+            "1. Java\n" +
+            "2. 객체지향\n" +
+            "3. Spring\n" +
+            "4. JPA\n" +
+            "5. MYSQL");
     }
 
     public void createOptionalSubject() {
         System.out.println(SEPARATE_LINE);
         System.out.println("[[ 선택 과목을 2개 이상 선택해주세요. ]]\n" +
-                "((ex) 1 2)\n" +
-                "1. 디자인 패턴\n" +
-                "2. Spring Security\n" +
-                "3. Redis\n" +
-                "4. MongoDB");
+            "((ex) 1 2)\n" +
+            "1. 디자인 패턴\n" +
+            "2. Spring Security\n" +
+            "3. Redis\n" +
+            "4. MongoDB");
     }
 
     public void createState() {
         System.out.println(SEPARATE_LINE);
         System.out.println("[[ 상태를 설정해주세요 ]]\n" +
-                "1. Green\n" +
-                "2. Yellow\n" +
-                "3. Red");
+            "1. Green\n" +
+            "2. Yellow\n" +
+            "3. Red");
     }
 
     public void updateId() {
@@ -91,8 +91,8 @@ public class OutputView {
         System.out.println(SEPARATE_LINE);
         System.out.printf(format, student.getStudentId(), student.getName(), student.getState());
         System.out.println("\"1. 이름 정보 수정\"\n"
-                + "\"2. 상태 정보 수정\"\n"
-                + "\"3. 돌아가기\"");
+            + "\"2. 상태 정보 수정\"\n"
+            + "\"3. 돌아가기\"");
     }
 
     public void updateName(Student student) {
@@ -107,8 +107,8 @@ public class OutputView {
         System.out.println(SEPARATE_LINE);
         System.out.printf(format, student.getStudentId(), student.getName(), student.getState());
         System.out.println("\"1. Green\"\n"
-                + "\"2. Yellow\"\n"
-                + "\"3. Red\"");
+            + "\"2. Yellow\"\n"
+            + "\"3. Red\"");
     }
 
     public void updateComplete(Student student) {
@@ -167,10 +167,10 @@ public class OutputView {
     public void isRealDelete(Student student) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "\"[[ 삭제하시겠습니까? ]]\"\n"
-                        + "\"|  " + student.getStudentId() + "  |  " + student.getName() + "  |  "
-                        + student.getState() + "  |    " + student.getSubject() + "    |\"\n"
-                        + "\"1. 삭제 2. 돌아가기\""
+            "\"[[ 삭제하시겠습니까? ]]\"\n"
+                + "\"|  " + student.getStudentId() + "  |  " + student.getName() + "  |  "
+                + student.getState() + "  |    " + student.getSubject() + "    |\"\n"
+                + "\"1. 삭제 2. 돌아가기\""
         );
     }
 
@@ -220,18 +220,18 @@ public class OutputView {
     public void readStudent() {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "\"1. 수강생 전체 정보 조회\"\n"
-                        + "\"2. 수강생 상태별 수강생 목록 조회\"\n"
-                        + "\"3. 돌아가기\""
+            "\"1. 수강생 전체 정보 조회\"\n"
+                + "\"2. 수강생 상태별 수강생 목록 조회\"\n"
+                + "\"3. 돌아가기\""
         );
     }
 
     public void getAllStudents(StudentList studentList) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "\"[[ 수강생 전체 정보  ]]\"\n"
-                        + String.format("| %-4s | %-4s | %-7s | %-3s |",
-                        "고유번호", "이름", "상태", "과목명")
+            "\"[[ 수강생 전체 정보  ]]\"\n"
+                + String.format("| %-4s | %-4s | %-7s | %-3s |",
+                "고유번호", "이름", "상태", "과목명")
         );
         for (Student student : studentList.getStudents()) {
             displayStudent(student);
@@ -240,8 +240,8 @@ public class OutputView {
 
     private void displayStudent(Student student) {
         System.out.format(
-                "| %-6s | %-4s | %-8s | ",
-                student.getStudentId(), student.getName(), student.getState()
+            "| %-6s | %-4s | %-8s | ",
+            student.getStudentId(), student.getName(), student.getState()
         );
         System.out.println(student.getSubjectNames() + " |");
     }
@@ -270,6 +270,7 @@ public class OutputView {
             System.out.println("[ERROR] 회차를 수정할 수 없습니다. 다시 시험봐주세요");
         }
     }
+
     public void updateScore(Student student, int subject, int subjectRound, int scoreIndex) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
@@ -284,10 +285,10 @@ public class OutputView {
     public void successScore(Student student, int subject, int subjectRound, int subjectScore) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "| " + student.getStudentId() + " |" + student.getName() + " | "
-                        + student.getSubject()
-                        .get(subject).getName() + " | " + subjectRound + " | " + subjectScore
-                        + " |");
+            "| " + student.getStudentId() + " |" + student.getName() + " | "
+                + student.getSubject()
+                .get(subject).getName() + " | " + subjectRound + " | " + subjectScore
+                + " |");
         System.out.println("[[ 수정이 완료 되었습니다 ]]");
 
     }
@@ -316,12 +317,12 @@ public class OutputView {
     public void manageReadScore() {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "1. 수강생의 특정 과목 회차별 등급을 조회\n" +
-                        "2. 특정 상태 수강생들의 필수 과목별 평균 등급 조회\n" +
-                        "3. 수강생의 과목별 평균 등급 조회\n" +
-                        "4. 돌아가기\n" +
+            "1. 수강생의 특정 과목 회차별 등급을 조회\n" +
+                "2. 특정 상태 수강생들의 필수 과목별 평균 등급 조회\n" +
+                "3. 수강생의 과목별 평균 등급 조회\n" +
+                "4. 돌아가기\n" +
 
-                        "조회 번호를 선택하세요...");
+                "조회 번호를 선택하세요...");
     }
 
     public void readStudentId() {
@@ -335,7 +336,7 @@ public class OutputView {
         System.out.println("[[ 과목을 입력하세요 ]]");
 
         int index = 1;
-        for(Subject subject : student.getSubject()){
+        for (Subject subject : student.getSubject()) {
             System.out.printf("%d. %s ", index, subject.getName());
             index++;
         }

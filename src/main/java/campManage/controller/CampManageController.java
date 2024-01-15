@@ -223,7 +223,7 @@ public class CampManageController {
         int inputSubjectScore = inputView.inputPerScore();
 
         SubjectGrade grade = campManageService.getSubjectGrade(student, inputSubjectScore,
-                selectedSubject);
+            selectedSubject);
         try {
             campManageService.handleScoreCreation(subjectScore, inputSubjectScore, grade);
             outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
@@ -306,11 +306,11 @@ public class CampManageController {
         outputView.readSubject(student);
         int subjectId = inputView.readSubjectIdByStudentId(student);
 
-        try{
+        try {
             Score score = campManageService.hasScore(student, subjectId);
             outputView.readSubjectGradeByStudent(score);
+        } catch (IllegalArgumentException ignored) {
         }
-        catch (IllegalArgumentException ignored){}
 
     }
 

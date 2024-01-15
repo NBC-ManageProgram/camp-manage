@@ -49,7 +49,7 @@ public class InputView {
     }
 
     public List<Subject> readSubjects(Consumer<String> consumer,
-            Function<Integer, Subject> function, String errorMessage) {
+        Function<Integer, Subject> function, String errorMessage) {
         while (true) {
             List<Subject> subjects = new ArrayList<>();
             try {
@@ -130,13 +130,13 @@ public class InputView {
     public List<Subject> requireSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getRequireSubjectByOrdinal;
         return readSubjects(this::validateRequireSubject, subjectMapper,
-                REQUIRE_SUBJECT_ERROR_MESSAGE);
+            REQUIRE_SUBJECT_ERROR_MESSAGE);
     }
 
     public List<Subject> optionalSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getOptionalSubjectByOrdinal;
         return readSubjects(this::validateOptionalSubject, subjectMapper,
-                OPTIONAL_SUBJECT_ERROR_MESSAGE);
+            OPTIONAL_SUBJECT_ERROR_MESSAGE);
     }
 
 
@@ -149,7 +149,7 @@ public class InputView {
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(
-                        "[ERROR] 잘못된 입력입니다. 수정 전 이름과 다르게 입력하거나, 공백을 제외한 2글자 이상 10글자 이하로 입력해주세요");
+                    "[ERROR] 잘못된 입력입니다. 수정 전 이름과 다르게 입력하거나, 공백을 제외한 2글자 이상 10글자 이하로 입력해주세요");
             }
         }
     }
@@ -338,7 +338,7 @@ public class InputView {
 
     private int validateUpdateSelectRange(int updateSelectNumber) {
         if (INPUT_START_RANGE <= updateSelectNumber
-                && updateSelectNumber <= MANAGE_MENU_END_RANGE) {
+            && updateSelectNumber <= MANAGE_MENU_END_RANGE) {
             return updateSelectNumber;
         }
         throw new IllegalArgumentException();
