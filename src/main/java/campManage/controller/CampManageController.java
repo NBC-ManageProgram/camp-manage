@@ -169,20 +169,25 @@ public class CampManageController {
      * @author 전석배
      */
     private void deleteStudent() {
-        // 삭제할 고유번호 입력
-        outputView.deleteStudentId();
-        int studentId = inputView.deleteStudentId();
+        if (StudentList.getInstance().getStudentsIsEmpty()) {
+            outputView.checkIsEmpty();
+        }else{
 
-        // 서비스
-        Student student = campManageService.getStudentByStudentId(studentId);
+            // 삭제할 고유번호 입력
+            outputView.deleteStudentId();
+            int studentId = inputView.deleteStudentId();
 
-        // 삭제 확인 여부 출력
-        outputView.isRealDelete(student);
-        int userDeleteChoice = inputView.userDeleteChoice();
+            // 서비스
+            Student student = campManageService.getStudentByStudentId(studentId);
 
-        if (userDeleteChoice == 1) {
-            campManageService.deleteStudent(student);
-            outputView.deleteCorrect();
+            // 삭제 확인 여부 출력
+            outputView.isRealDelete(student);
+            int userDeleteChoice = inputView.userDeleteChoice();
+
+            if (userDeleteChoice == 1) {
+                campManageService.deleteStudent(student);
+                outputView.deleteCorrect();
+            }
         }
 
     }
@@ -240,13 +245,17 @@ public class CampManageController {
 
     // 점수 조회
     private void readScore() {
-        outputView.manageReadScore();
-        int manageReadScore = inputView.manageReadScore();
-        switch (manageReadScore) {
-            case 1 -> System.out.println("수강생의 특정 과목 회차별 등급을 조회");
-            case 2 -> readStudentByState();
-            case 3 -> System.out.println("수강생의 과목별 평균 등급 조회");
-            case 4 -> outputView.backToManageMenu();
+        if (StudentList.getInstance().getStudentsIsEmpty()) {
+            outputView.checkIsEmpty();
+        }else{
+            outputView.manageReadScore();
+            int manageReadScore = inputView.manageReadScore();
+            switch (manageReadScore) {
+                case 1 -> System.out.println("수강생의 특정 과목 회차별 등급을 조회");
+                case 2 -> readStudentByState();
+                case 3 -> System.out.println("수강생의 과목별 평균 등급 조회");
+                case 4 -> outputView.backToManageMenu();
+            }
         }
     }
 
