@@ -5,6 +5,8 @@ import campManage.domain.State;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
+import campManage.domain.SubjectCategory;
+import campManage.domain.SubjectGrade;
 import campManage.service.CampManageService;
 import campManage.view.InputView;
 import campManage.view.OutputView;
@@ -217,18 +219,24 @@ public class CampManageController {
         outputView.ShowStudentName(student, student.getSubject());
         //점수 입력할 과목 선택받기 student에 있는 인덱스 번호 (선택번호 -1)
         int selectedSubject = inputView.SelectedSubject(student.getSubject().size());
+        Score subjectScore = campManageService.getSubjectScore(student, selectedSubject);
+
+        int emptyRound = subjectScore.isemptyScore();
         //점수 입력하세요 출력
+        outputView.createScore(student, selectedSubject, emptyRound);
+        int inputSubjectScore = inputView.inputPerScore();
 
-        outputView.createScore(student, selectedSubject);
+        SubjectGrade grade = campManageService.getSubjectGrade(student, inputSubjectScore,
+            selectedSubject);
 
-        Score subjectScore = student.getSubjectScore(student, selectedSubject);
-        int inputsubjectScore = inputView.inputPerScore();
-        subjectScore.addScore(inputsubjectScore);
-
-
-        //등록 완료
-        OutputView.createScoreComplete(student, selectedSubject, inputsubjectScore);
-
+        if (subjectScore.getScorePerRoundSize() >= 10) {
+            System.out.println("[ERROR] 10회 이상의 입력은 불가능합니다.");
+        } else {
+            subjectScore.addScore(inputSubjectScore);
+            subjectScore.addGrade(grade);
+        OutputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
+            grade);
+        }
 
     }
 
@@ -243,7 +251,6 @@ public class CampManageController {
      * @author 유경진
      */
     private void updateScore() {
-        //고유번호 입력
         outputView.inputStudentId();
         int id = inputView.deleteStudentId();   //  <-이름수정이 필요할듯(공용사용)
         // 서비스
@@ -269,7 +276,6 @@ public class CampManageController {
             student.getScores().get(scoreIndex).setScorePerRound(subjectRound, subjectScore);
             //완...료
             outputView.successScore(student, scoreIndex, subjectRound, subjectScore);
-        }
     }
 
 

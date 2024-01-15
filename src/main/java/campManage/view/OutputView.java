@@ -6,6 +6,7 @@ import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
 import campManage.domain.State;
+import campManage.domain.SubjectGrade;
 import java.util.List;
 
 public class OutputView {
@@ -194,23 +195,25 @@ public class OutputView {
         }
     }
 
-    public static void createScore(Student student, int subjectIndex) {
+    public static void createScore(Student student, int subjectIndex, int round) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-            student.getStudentId() + "|" + student.getName() + "|" + student.getSubject()
-                .get(subjectIndex).getName() + "|");
+            student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
+                .get(subjectIndex).getName() + " | " + round + "회차");
         System.out.println("[[ 점수를 입력하세요 ]]");
 
 
     }
 
 
-    public static void createScoreComplete(Student student, int subjectIndex, int subjectScore) {
+    public static void createScoreComplete(Student student, int subjectIndex, int subjectScore,
+        int round, SubjectGrade grade) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-            student.getStudentId() + "|" + student.getName() + "|" + student.getSubject()
-                .get(subjectIndex).getName() + "|" + student.getScores().get(0)
-                .getScorePerRoundSize() + "|" + subjectScore + "|등급");
+            student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
+                .get(subjectIndex).getName() + "| " + round + "회차 | " + subjectScore + " | " +
+                grade + "등급");
+        System.out.println("[[ 등록이 완료되었습니다. ]]");
 
     }
 
