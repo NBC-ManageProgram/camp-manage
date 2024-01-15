@@ -345,12 +345,12 @@ public class InputView {
             }
         }
     }
-  
+
     public int roundSelect(int roundSize){
         while (true) {
             try {
                 int round = readUserInput();
-                if(round > 0 || round < roundSize){
+                if(round > 0 && round <= roundSize){
                     return round;
                 }
                 throw new IllegalArgumentException();
@@ -359,10 +359,20 @@ public class InputView {
             }
         }
     }
-  
+
     public int inputScore(){
-        int score = readUserInput();
-        return score;
+        while (true) {
+            try {
+                int score = readUserInput();
+                if(score >= 0 && score <= 100){
+                    return score;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 0 이상 100 이하의 정수로 점수를 입력해주세요.");
+            }
+        }
     }
+
 
 }
