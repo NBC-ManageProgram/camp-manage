@@ -1,17 +1,18 @@
 package campManage.domain;
 
 import java.util.List;
-import java.util.Map;
 
 public class Score {
 
     private final int subjectId;
     private List<Integer> scorePerRound;
+    private List<SubjectGrade> gradePerRound;
 
 
-    public Score(int subjectId, List<Integer> scorePerRound) {
+    public Score(int subjectId, List<Integer> scorePerRound, List<SubjectGrade> gradePerRound) {
         this.subjectId = subjectId;
         this.scorePerRound = scorePerRound;
+        this.gradePerRound = gradePerRound;
     }
 
     public int getSubjectId() {
@@ -26,24 +27,26 @@ public class Score {
         scorePerRound.add(score);
     }
 
+    public void addGrade(SubjectGrade grade) {
+        gradePerRound.add(grade);
+    }
+
+    public List<SubjectGrade> getGrade() {
+        return gradePerRound;
+    }
+
     public int getScorePerRoundSize() {
         return this.scorePerRound.size();
     }
 
-
-    public int isemptyScore(int subjectId) {
+    public int isemptyScore() {
         for (int i = 1; i <= 10; i++) {
             boolean roundExists = scorePerRound.size() >= i;
-
             if (!roundExists) {
-
-                System.out.println("과목 " + subjectId + " 회차: " + i);
                 return i;
-
             }
         }
-
-        return 0;
+        return 11;
     }
 
 

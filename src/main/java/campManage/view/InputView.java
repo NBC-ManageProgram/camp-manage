@@ -20,12 +20,12 @@ public class InputView {
     private static final String NAME_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 공백을 제외한 2글자 이상 10글자 이하의 한글로 입력해 주세요.";
 
     private static final String REQUIRE_SUBJECT_ERROR_MESSAGE =
-            "[ERROR] 잘못된 입력입니다. 1 이상 5 이하의 정수로 서로 다른 3개 이상의 필수 과목을 선택해주세요.\n" +
-                    "각 과목은 공백으로 구분되어야 합니다.";
+        "[ERROR] 잘못된 입력입니다. 1 이상 5 이하의 정수로 서로 다른 3개 이상의 필수 과목을 선택해주세요.\n" +
+            "각 과목은 공백으로 구분되어야 합니다.";
 
     private static final String OPTIONAL_SUBJECT_ERROR_MESSAGE =
-            "[ERROR] 잘못된 입력입니다. 1 이상 4 이하의 정수로 서로 다른 2개 이상의 선택 과목을 선택해주세요.\n" +
-                    "각 과목은 공백으로 구분되어야 합니다.";
+        "[ERROR] 잘못된 입력입니다. 1 이상 4 이하의 정수로 서로 다른 2개 이상의 선택 과목을 선택해주세요.\n" +
+            "각 과목은 공백으로 구분되어야 합니다.";
 
     private static final String STATE_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 1 이상 3 이하의 정수로 입력해주세요.";
     private static final String UPDATE_INPUT_MESSAGE = "[ERROR] 잘못된 입력입니다. 유효한 고유번호를 입력해주세요.";
@@ -51,7 +51,7 @@ public class InputView {
     }
 
     public List<Subject> readSubjects(Consumer<String> consumer,
-            Function<Integer, Subject> function, String errorMessage) {
+        Function<Integer, Subject> function, String errorMessage) {
         while (true) {
             List<Subject> subjects = new ArrayList<>();
             try {
@@ -118,13 +118,13 @@ public class InputView {
     public List<Subject> requireSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getRequireSubjectByOrdinal;
         return readSubjects(this::validateRequireSubject, subjectMapper,
-                REQUIRE_SUBJECT_ERROR_MESSAGE);
+            REQUIRE_SUBJECT_ERROR_MESSAGE);
     }
 
     public List<Subject> optionalSubject() {
         Function<Integer, Subject> subjectMapper = Subject::getOptionalSubjectByOrdinal;
         return readSubjects(this::validateOptionalSubject, subjectMapper,
-                OPTIONAL_SUBJECT_ERROR_MESSAGE);
+            OPTIONAL_SUBJECT_ERROR_MESSAGE);
     }
 
 
@@ -137,7 +137,7 @@ public class InputView {
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(
-                        "[ERROR] 잘못된 입력입니다. 수정 전 이름과 다르게 입력하거나, 공백을 제외한 2글자 이상 10글자 이하로 입력해주세요");
+                    "[ERROR] 잘못된 입력입니다. 수정 전 이름과 다르게 입력하거나, 공백을 제외한 2글자 이상 10글자 이하로 입력해주세요");
             }
         }
     }
@@ -266,7 +266,7 @@ public class InputView {
                 }
                 throw new IllegalArgumentException();
             } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 잘못된 입력입니다. ");
+                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 과목 번호를 입력해주세요. ");
             }
         }
 
@@ -274,9 +274,19 @@ public class InputView {
 
 
     public int inputPerScore() {
-        int perscore = readUserInput();
-        return perscore;
+        while (true) {
+            try {
+                int perscore = readUserInput();
+                if (perscore >= 1 && perscore <= 100) {
+                    return perscore;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 0 이상 100 이하의 정수로 점수를 입력해주세요.");
+            }
+        }
     }
+
     public int readStudent() {
         while (true) {
             try {
@@ -307,7 +317,7 @@ public class InputView {
 
     private int validateUpdateSelectRange(int updateSelectNumber) {
         if (INPUT_START_RANGE <= updateSelectNumber
-                && updateSelectNumber <= MANAGE_MENU_END_RANGE) {
+            && updateSelectNumber <= MANAGE_MENU_END_RANGE) {
             return updateSelectNumber;
         }
         throw new IllegalArgumentException();
