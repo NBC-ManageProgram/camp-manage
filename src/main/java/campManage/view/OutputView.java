@@ -186,7 +186,7 @@ public class OutputView {
 
     public void ShowStudentName(Student student, List<Subject> subjects) {
         System.out.println(SEPARATE_LINE);
-        System.out.println(student.getStudentId() + "|" + student.getName() + "|");
+        System.out.println("| " + student.getStudentId() + " | " + student.getName() + " | ");
         System.out.println("[[ 과목을 입력하세요 ]]");
 
         for (int i = 0; i < subjects.size(); i++) {
@@ -195,26 +195,30 @@ public class OutputView {
         }
     }
 
-    public static void createScore(Student student, int subjectIndex, int round) {
+    public void createScore(Student student, int subjectIndex, int round) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-            student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
-                .get(subjectIndex).getName() + " | " + round + "회차");
+            "| " + student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
+                .get(subjectIndex).getName() + " | " + round + "회차 |");
         System.out.println("[[ 점수를 입력하세요 ]]");
 
 
     }
 
 
-    public static void createScoreComplete(Student student, int subjectIndex, int subjectScore,
+    public void createScoreComplete(Student student, int subjectIndex, int subjectScore,
         int round, SubjectGrade grade) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-            student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
-                .get(subjectIndex).getName() + "| " + round + "회차 | " + subjectScore + " | " +
-                grade + "등급");
+            "| " + student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
+                .get(subjectIndex).getName() + " | " + round + "회차 | " + subjectScore + "점 | " +
+                grade + "등급 |");
         System.out.println("[[ 등록이 완료되었습니다. ]]");
 
+    }
+
+    public void roundSizeError() {
+        System.out.println("[ERROR] 10회 이상의 입력은 불가능합니다.");
     }
 
     public void readStudent() {
