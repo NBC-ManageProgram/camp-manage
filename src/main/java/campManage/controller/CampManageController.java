@@ -245,7 +245,7 @@ public class CampManageController {
         int manageReadScore = inputView.manageReadScore();
         switch (manageReadScore) {
             case 1 -> readSubjectGradeByStudent();
-            case 2 -> System.out.println("특정 상태 수강생들의 필수 과목별 평균 등급 조회");
+            case 2 -> readStudentByState();
             case 3 -> System.out.println("수강생의 과목별 평균 등급 조회");
             case 4 -> outputView.backToManageMenu();
 
