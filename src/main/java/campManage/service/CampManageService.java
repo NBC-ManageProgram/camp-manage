@@ -14,6 +14,7 @@ import java.util.List;
 
 public class CampManageService {
     private static final String SCORE_ERROR_MESSAGE = "[ERROR] 아직 한번도 시험을 보지 않은 과목입니다.";
+    private static final int INDEX = 1;
 
     private final StudentList studentList;
 
@@ -108,7 +109,7 @@ public class CampManageService {
     public Score hasScore(Student student, int subjectId) {
         List<Score> scores = student.getScores();
 
-        Subject selectedSubject = student.getSubject().get(subjectId);
+        Subject selectedSubject = student.getSubject().get(subjectId-INDEX);
 
         for (Score score : scores) {
             if(score.getSubjectId() == selectedSubject.getSubjectId()){
