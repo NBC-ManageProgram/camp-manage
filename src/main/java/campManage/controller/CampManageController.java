@@ -256,13 +256,15 @@ public class CampManageController {
      *
      * @author 송선호
      */
-
-
     private void readStudentByState() {
-        outputView.readStudentByState();
-        State state = inputView.selectState();
-        List<Student> students = StudentList.getInstance().getStudentBySpecificState(state);
-        outputView.readStudentBySpecificState(students);
+        if (StudentList.getInstance().checkStudentScoreIsEmpty()) {
+            outputView.checkStudentScoreIsEmpty();
+        } else {
+            outputView.readStudentByState();
+            State state = inputView.selectState();
+            List<Student> students = StudentList.getInstance().getStudentBySpecificState(state);
+            outputView.readStudentBySpecificState(students);
+        }
     }
 
 
