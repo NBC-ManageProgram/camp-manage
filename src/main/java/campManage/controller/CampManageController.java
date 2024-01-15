@@ -5,14 +5,11 @@ import campManage.domain.State;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
-import campManage.domain.SubjectCategory;
 import campManage.domain.SubjectGrade;
 import campManage.service.CampManageService;
 import campManage.view.InputView;
 import campManage.view.OutputView;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class CampManageController {
 
@@ -231,7 +228,7 @@ public class CampManageController {
         int inputSubjectScore = inputView.inputPerScore();
 
         SubjectGrade grade = campManageService.getSubjectGrade(student, inputSubjectScore,
-                selectedSubject);
+            selectedSubject);
         try {
             campManageService.handleScoreCreation(subjectScore, inputSubjectScore, grade);
             outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
@@ -243,7 +240,11 @@ public class CampManageController {
     }
 
 
-    // 점수 조회
+    /**
+     * 점수 조회
+     *
+     * @author 손준형
+     */
     private void readScore() {
         if (StudentList.getInstance().getStudentsIsEmpty()) {
             outputView.checkIsEmpty();
@@ -275,6 +276,51 @@ public class CampManageController {
         }
     }
 
+    /**
+     * 점수 조회(수강생의 과목별 평균 등급 조회)
+     *
+     * @author 유경진
+     */
+    private void readAvgGrade() {
+        outputView.inputStudentId();
+        int id = inputView.deleteStudentId();
+        // 서비스
+        Student student = campManageService.getStudentByStudentId(id);
+        //학생정보 출력
+        outputView.showAvgStudent(student);
+        // 서비스
+        for (int i = 0; i < student.getSubject().size(); i++) {
+            int subjectId = student.getSubject().get(i).ordinal();       //과목.ordinal
+            int scoreIndex = campManageService.getScoreIndex(student, subjectId);   //그 과목 인덱스 찾기
+            if (scoreIndex < 10) {
+                System.out.println(student.getSubject().get(i).getName() + " | "
+                    + campManageService.getSubjectGrade(student,
+                    campManageService.avgScore(student, scoreIndex), i));
+            } else {
+                System.out.println(student.getSubject().get(i).getName() + " | 점수가 없습니다.");
+            }
+        }
+    }
+
+    /**
+     * 수강생의 특정 과목 회차별 등급 조회
+     *
+     * @author 손준형
+     */
+    private void readSubjectGradeByStudent() {
+        outputView.readStudentId();
+        int studentId = inputView.readStudentId();
+        Student student = campManageService.getStudentByStudentId(studentId);
+        outputView.readSubject(student);
+        int subjectId = inputView.readSubjectIdByStudentId(student);
+
+        try {
+            Score score = campManageService.hasScore(student, subjectId);
+            outputView.readSubjectGradeByStudent(score);
+        } catch (IllegalArgumentException ignored) {
+        }
+
+    }
 
     /**
      * 점수 수정
@@ -283,7 +329,7 @@ public class CampManageController {
      */
     private void updateScore() {
         outputView.inputStudentId();
-        int id = inputView.deleteStudentId();   //  <-이름수정이 필요할듯(공용사용)
+        int id = inputView.deleteStudentId();
         // 서비스
         Student student = campManageService.getStudentByStudentId(id);
         //과목입력
@@ -311,6 +357,8 @@ public class CampManageController {
             //완...료
             outputView.successScore(student, subjectIndex, subjectRound, subjectScore);
         }
+
+
     }
 }
 

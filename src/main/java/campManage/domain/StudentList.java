@@ -58,23 +58,20 @@ public class StudentList {
 
     public Student getStudentByStudentId(int studentId) {
         return students.stream()
-                .filter(student -> student.getStudentId() == studentId)
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+            .filter(student -> student.getStudentId() == studentId)
+            .findFirst()
+            .orElseThrow(IllegalArgumentException::new);
     }
 
     public List<Student> getStudentBySpecificState(State state) {
-        // 1. 상태로 필터링
-        // 2. 각 학생마다 과목에서 필수과목만 필터링
         return students.stream().filter(e -> e.getState() == state)
                 .filter(e -> e.getSubject().stream()
-                        .anyMatch(i -> i.getSubjectCategory() == SubjectCategory.REQUIRE)).toList();
-
+                .anyMatch(i -> i.getSubjectCategory() == SubjectCategory.REQUIRE)).toList();
     }
 
     public int validateStudentsId(int studentId) { // return int
         boolean validate = students.stream()
-                .anyMatch(student -> student.getStudentId() == studentId);
+            .anyMatch(student -> student.getStudentId() == studentId);
         if (validate) {
             return studentId;
         }
@@ -89,7 +86,7 @@ public class StudentList {
     // 학생 정보 가져오기
     public Student bringStudent(int id) {
         return students.stream().filter(student -> student.getStudentId() == id).findFirst()
-                .orElseThrow(() -> new IllegalArgumentException());
+            .orElseThrow(() -> new IllegalArgumentException());
     }
 
 

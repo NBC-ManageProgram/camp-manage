@@ -60,11 +60,11 @@ public class Student {
 
     public String getSubjectNames() {
         return subject.stream().map(Subject::getName)
-                .collect(Collectors.joining(", "));
+            .collect(Collectors.joining(", "));
     }
 
     public SubjectGrade getSubjectAverage() {
         return SubjectGrade.requireGetGrade(
-                scores.stream().mapToInt(Score::getAverageScore).sum() / scores.size());
+            scores.stream().mapToInt(Score::getAverageScore).sum() / scores.size());
     }
 }
