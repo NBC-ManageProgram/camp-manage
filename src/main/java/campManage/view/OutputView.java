@@ -304,12 +304,17 @@ public class OutputView {
     }
 
     public void readStudentBySpecificState(List<Student> students) {
-        String format = "|  %s  |  %d  |";
+        String format = "|  %s  |  %s  |\n";
         System.out.println(SEPARATE_LINE);
         System.out.println("|  이름  |  평균 등급  |");
         for (Student studentByState : students) {
-            System.out.printf(format,studentByState.getName());
-        };
+            System.out.printf(format, studentByState.getName(), studentByState.getSubjectAverage());
+        }
+        ;
+    }
+
+    public void checkStudentScoreIsEmpty() {
+        System.out.println("[ERROR] 점수가 등록이 안되어있습니다. 등록을 먼저 해주시길 바랍니다.");
     }
 
     public void manageReadScore() {

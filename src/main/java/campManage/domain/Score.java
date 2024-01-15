@@ -15,6 +15,10 @@ public class Score {
         this.gradePerRound = gradePerRound;
     }
 
+    public int getAverageScore() {
+        return scorePerRound.stream().mapToInt(Integer::intValue).sum() / scorePerRound.size();
+    }
+
     public int getSubjectId() {
         return subjectId;
     }
