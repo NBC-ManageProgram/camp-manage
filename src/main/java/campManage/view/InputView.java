@@ -346,11 +346,11 @@ public class InputView {
         }
     }
 
-    public int roundSelect(int roundSize){
+    public int roundSelect(int roundSize) {
         while (true) {
             try {
                 int round = readUserInput();
-                if(round > 0 && round <= roundSize){
+                if (round > 0 && round <= roundSize) {
                     return round;
                 }
                 throw new IllegalArgumentException();
@@ -360,11 +360,11 @@ public class InputView {
         }
     }
 
-    public int inputScore(){
+    public int inputScore() {
         while (true) {
             try {
                 int score = readUserInput();
-                if(score >= 0 && score <= 100){
+                if (score >= 0 && score <= 100) {
                     return score;
                 }
                 throw new IllegalArgumentException();

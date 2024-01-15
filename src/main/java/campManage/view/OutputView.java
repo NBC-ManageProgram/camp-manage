@@ -245,6 +245,7 @@ public class OutputView {
         );
         System.out.println(student.getSubjectNames() + " |");
     }
+
     public void subjectSelect(Student student) {
         System.out.println(SEPARATE_LINE);
         ;
@@ -254,30 +255,35 @@ public class OutputView {
             System.out.println((i + 1) + ". " + student.getSubject().get(i).getName());
         }
     }
+
     public void roundSelect(Student student, int subject, int subjectIndex) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-            "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject().get(subjectIndex).getName() + " |");
+            "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject()
+                .get(subjectIndex).getName() + " |");
 
         try {
             int round = student.getScores().get(subject).getScorePerRound().size();
             System.out.println(round);
             System.out.printf("총 회차 : %d\n", round);
             System.out.println("[[ 회차를 입력하세요 ]]");
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("[ERROR] 회차를 수정할 수 없습니다. 다시 시험봐주세요");
         }
     }
-    public void updateScore(Student student, int subject, int subjectRound, int scoreIndex){
+
+    public void updateScore(Student student, int subject, int subjectRound, int scoreIndex) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
             "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject()
                 .get(subject).getName() + " | " + subjectRound + " |");
-        System.out.println("현재 점수 : " + student.getScores().get(scoreIndex).getScorePerRound().get(subjectRound - 1));
+        System.out.println("현재 점수 : " + student.getScores().get(scoreIndex).getScorePerRound()
+            .get(subjectRound - 1));
         System.out.println("[[ 새로운 점수를 입력하세요 ]]");
 
     }
-    public void successScore(Student student, int subject, int subjectRound, int subjectScore){
+
+    public void successScore(Student student, int subject, int subjectRound, int subjectScore) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
             "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject()
