@@ -34,6 +34,7 @@ public class InputView {
     private static final int MANAGE_MENU_END_RANGE = 3;
     private static final int MANAGE_STUDENT_END_RANGE = 5;
     private static final int MANAGE_SCORE_END_RANGE = 4;
+    private static final int MANAGE_READ_SCORE_END_RANGE = 4;
 
     private static final Pattern NAME_PATTERN = Pattern.compile("^[가-힣]{2,10}$");
     private static final Pattern REQUIRE_SUBJECT_PATTERN = Pattern.compile("([1-5]\\s){2,}[1-5]");
@@ -94,6 +95,10 @@ public class InputView {
 
     public int manageScore() {
         return getInputWithValidation(this::validateManageScoreRange, INPUT_ERROR_MESSAGE);
+    }
+
+    public int manageReadScore() {
+        return getInputWithValidation(this::validateManageReadScoreRange, INPUT_ERROR_MESSAGE);
     }
 
 
@@ -186,6 +191,10 @@ public class InputView {
 
     private int validateManageScoreRange(int manageScoreNumber) {
         return validateRange(manageScoreNumber, MANAGE_SCORE_END_RANGE);
+    }
+
+    private int validateManageReadScoreRange(int manageReadScore) {
+        return validateRange(manageReadScore, MANAGE_READ_SCORE_END_RANGE);
     }
 
     private void validateIsDuplicate(List<String> subjectNumbers) {
@@ -322,4 +331,48 @@ public class InputView {
         }
         throw new IllegalArgumentException();
     }
+
+    public int subjectSelect(int size) {
+        while (true) {
+            try {
+                int subjectId = readUserInput();
+                if (subjectId > 0 && subjectId <= size) {
+                    return subjectId - 1;
+                } //그냥 인덱스값으로 ,,,
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 과목번호를 입력해주세요.");
+            }
+        }
+    }
+
+    public int roundSelect(int roundSize) {
+        while (true) {
+            try {
+                int round = readUserInput();
+                if (round > 0 && round <= roundSize) {
+                    return round;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 회차를 입력해주세요.");
+            }
+        }
+    }
+
+    public int inputScore() {
+        while (true) {
+            try {
+                int score = readUserInput();
+                if (score >= 0 && score <= 100) {
+                    return score;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 0 이상 100 이하의 정수로 점수를 입력해주세요.");
+            }
+        }
+    }
+
+
 }

@@ -10,7 +10,9 @@ import campManage.domain.SubjectGrade;
 import campManage.service.CampManageService;
 import campManage.view.InputView;
 import campManage.view.OutputView;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class CampManageController {
 
@@ -208,11 +210,13 @@ public class CampManageController {
 
         // 고유번호 입력하세요 출력
         outputView.inputStudentId();
+        //검증한 고유번호 입력받기
         int studentID = inputView.readStudentId();
         Student student = campManageService.getStudentByStudentId(studentID);
 
         // 과목 입력하세요 출력
         outputView.ShowStudentName(student, student.getSubject());
+        //점수 입력할 과목 선택받기
         int selectedSubject = inputView.SelectedSubject(student.getSubject().size());
         Score subjectScore = campManageService.getSubjectScore(student, selectedSubject);
 
@@ -224,11 +228,13 @@ public class CampManageController {
         SubjectGrade grade = campManageService.getSubjectGrade(student, inputSubjectScore,
             selectedSubject);
 
-        try {
-            campManageService.handleScoreCreation(subjectScore, inputSubjectScore, grade);
-            outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound, grade);
-        } catch (RuntimeException e) {
-            outputView.roundSizeError();
+        if (subjectScore.getScorePerRoundSize() >= 10) {
+            System.out.println("[ERROR] 10회 이상의 입력은 불가능합니다.");
+        } else {
+            subjectScore.addScore(inputSubjectScore);
+            subjectScore.addGrade(grade);
+        OutputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
+            grade);
         }
 
     }
@@ -236,6 +242,15 @@ public class CampManageController {
 
     // 점수 조회
     private void readScore() {
+        outputView.manageReadScore();
+        int manageReadScore = inputView.manageReadScore();
+        switch (manageReadScore) {
+            case 1 -> System.out.println("수강생의 특정 과목 회차별 등급을 조회");
+            case 2 -> System.out.println("특정 상태 수강생들의 필수 과목별 평균 등급 조회");
+            case 3 -> System.out.println("수강생의 과목별 평균 등급 조회");
+            case 4 -> outputView.backToManageMenu();
+
+        }
 
     }
 
@@ -245,8 +260,33 @@ public class CampManageController {
      * @author 유경진
      */
     private void updateScore() {
+        outputView.inputStudentId();
+        int id = inputView.deleteStudentId();   //  <-이름수정이 필요할듯(공용사용)
+        // 서비스
+        Student student = campManageService.getStudentByStudentId(id);
+        //과목입력
+        outputView.subjectSelect(student);
+        int subjectIndex = inputView.subjectSelect(student.getSubject().size()); //Subject에 들어온순서
+        int subjectId = student.getSubject().get(subjectIndex).ordinal();       //과목.ordinal
+        int scoreIndex = campManageService.getScoreIndex(student, subjectId);   //그 과목 인덱스 찾기
+        if (scoreIndex == 10) { // ordinal은 10을 넘을 수 없기에 초기값을 10으로 설정해뒀습니다.
+            System.out.println("찾을 수 없습니다.");
+        } else {
+            int roundSize = student.getScores().get(scoreIndex).getScorePerRound().size();
+            //회차입력
+            outputView.roundSelect(student, scoreIndex, subjectIndex);
+            int subjectRound = inputView.roundSelect(roundSize);
 
+            //점수입력
+            outputView.updateScore(student, subjectIndex, subjectRound, scoreIndex);
+            int subjectScore = inputView.inputScore(); //새로받은 점수
+
+            //점수 수정
+            student.getScores().get(scoreIndex).setScorePerRound(subjectRound, subjectScore);
+
+            //완...료
+            outputView.successScore(student, subjectIndex, subjectRound, subjectScore);
+        }
     }
-
-
 }
+

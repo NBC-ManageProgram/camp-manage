@@ -49,5 +49,7 @@ public class Score {
         return 11;
     }
 
-
+    public void setScorePerRound(int round, int score) {
+        scorePerRound.set(round - 1, score);
+    }
 }
