@@ -166,20 +166,25 @@ public class CampManageController {
      * @author 전석배
      */
     private void deleteStudent() {
-        // 삭제할 고유번호 입력
-        outputView.deleteStudentId();
-        int studentId = inputView.deleteStudentId();
+        if (StudentList.getInstance().getStudentsIsEmpty()) {
+            outputView.checkIsEmpty();
+        }else{
 
-        // 서비스
-        Student student = campManageService.getStudentByStudentId(studentId);
+            // 삭제할 고유번호 입력
+            outputView.deleteStudentId();
+            int studentId = inputView.deleteStudentId();
 
-        // 삭제 확인 여부 출력
-        outputView.isRealDelete(student);
-        int userDeleteChoice = inputView.userDeleteChoice();
+            // 서비스
+            Student student = campManageService.getStudentByStudentId(studentId);
 
-        if (userDeleteChoice == 1) {
-            campManageService.deleteStudent(student);
-            outputView.deleteCorrect();
+            // 삭제 확인 여부 출력
+            outputView.isRealDelete(student);
+            int userDeleteChoice = inputView.userDeleteChoice();
+
+            if (userDeleteChoice == 1) {
+                campManageService.deleteStudent(student);
+                outputView.deleteCorrect();
+            }
         }
 
     }
@@ -227,7 +232,7 @@ public class CampManageController {
         try {
             campManageService.handleScoreCreation(subjectScore, inputSubjectScore, grade);
             outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
-                grade);
+                    grade);
         } catch (RuntimeException e) {
             outputView.roundSizeError();
         }
@@ -241,14 +246,17 @@ public class CampManageController {
      * @author 손준형
      */
     private void readScore() {
-        outputView.manageReadScore();
-        int manageReadScore = inputView.manageReadScore();
-        switch (manageReadScore) {
-            case 1 -> readSubjectGradeByStudent();
-            case 2 -> readStudentByState();
-            case 3 -> readAvgGrade();
-            case 4 -> outputView.backToManageMenu();
-
+        if (StudentList.getInstance().getStudentsIsEmpty()) {
+            outputView.checkIsEmpty();
+        }else{
+            outputView.manageReadScore();
+            int manageReadScore = inputView.manageReadScore();
+            switch (manageReadScore) {
+                case 1 -> System.out.println("수강생의 특정 과목 회차별 등급을 조회");
+                case 2 -> readStudentByState();
+                case 3 -> System.out.println("수강생의 과목별 평균 등급 조회");
+                case 4 -> outputView.backToManageMenu();
+            }
         }
     }
 
@@ -341,10 +349,10 @@ public class CampManageController {
             outputView.updateScore(student, subjectIndex, subjectRound, scoreIndex);
             int subjectScore = inputView.inputScore(); //새로받은 점수
             SubjectGrade grade = campManageService.getSubjectGrade(student, subjectScore,
-                subjectIndex);
+                    subjectIndex);
             //점수 수정
             student.getScores().get(scoreIndex)
-                .setScorePerRound(subjectRound, subjectScore, subjectId, grade);
+                    .setScorePerRound(subjectRound, subjectScore, subjectId, grade);
 
             //완...료
             outputView.successScore(student, subjectIndex, subjectRound, subjectScore);

@@ -307,11 +307,10 @@ public class OutputView {
         for (Student studentByState : students) {
             System.out.printf(format, studentByState.getName(), studentByState.getSubjectAverage());
         }
-        ;
     }
 
     public void checkStudentScoreIsEmpty() {
-        System.out.println("[ERROR] 점수가 등록이 안되어있습니다. 등록을 먼저 해주시길 바랍니다.");
+        System.out.println("[ERROR] 점수가 등록이 안되어있는 학생이 있습니다. 등록을 먼저 해주시길 바랍니다.");
     }
 
     public void manageReadScore() {
