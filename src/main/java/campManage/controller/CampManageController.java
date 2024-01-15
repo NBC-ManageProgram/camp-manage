@@ -228,16 +228,16 @@ public class CampManageController {
         SubjectGrade grade = campManageService.getSubjectGrade(student, inputSubjectScore,
             selectedSubject);
 
-        if (subjectScore.getScorePerRoundSize() >= 10) {
-            System.out.println("[ERROR] 10회 이상의 입력은 불가능합니다.");
-        } else {
-            subjectScore.addScore(inputSubjectScore);
-            subjectScore.addGrade(grade);
-            OutputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
+        try {
+            campManageService.handleScoreCreation(subjectScore, inputSubjectScore, grade);
+            outputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
                 grade);
+        } catch (RuntimeException e) {
+            outputView.roundSizeError();
         }
 
     }
+
 
     // 점수 조회
     private void readScore() {
