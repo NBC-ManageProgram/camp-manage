@@ -231,10 +231,10 @@ public class CampManageController {
         } else {
             subjectScore.addScore(inputSubjectScore);
             subjectScore.addGrade(grade);
-        }
-
         OutputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
             grade);
+        }
+
     }
 
 
