@@ -13,10 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CampManageService {
+    private static final String SCORE_ERROR_MESSAGE = "[ERROR] 아직 한번도 시험을 보지 않은 과목입니다.";
 
-    //    private final Student student;
-//    private final Score score;
-//    private final Subject subject;
     private final StudentList studentList;
 
     public CampManageService() {
@@ -93,5 +91,19 @@ public class CampManageService {
             }
         }
         return index;
+    }
+
+    public Score hasScore(Student student, int subjectId) {
+        List<Score> scores = student.getScores();
+
+        Subject selectedSubject = student.getSubject().get(subjectId);
+
+        for (Score score : scores) {
+            if(score.getSubjectId() == selectedSubject.getSubjectId()){
+                return score;
+            }
+        }
+        System.out.println(SCORE_ERROR_MESSAGE);
+        throw new IllegalArgumentException();
     }
 }

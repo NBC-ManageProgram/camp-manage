@@ -5,14 +5,11 @@ import campManage.domain.State;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
-import campManage.domain.SubjectCategory;
 import campManage.domain.SubjectGrade;
 import campManage.service.CampManageService;
 import campManage.view.InputView;
 import campManage.view.OutputView;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class CampManageController {
 
@@ -239,17 +236,41 @@ public class CampManageController {
 
     }
 
-    // 점수 조회
+    /**
+     * 점수 조회
+     *
+     * @author 손준형
+     */
     private void readScore() {
         outputView.manageReadScore();
         int manageReadScore = inputView.manageReadScore();
         switch (manageReadScore) {
-            case 1 -> System.out.println("수강생의 특정 과목 회차별 등급을 조회");
+            case 1 -> readSubjectGradeByStudent();
             case 2 -> System.out.println("특정 상태 수강생들의 필수 과목별 평균 등급 조회");
             case 3 -> System.out.println("수강생의 과목별 평균 등급 조회");
             case 4 -> outputView.backToManageMenu();
 
         }
+
+    }
+
+    /**
+     * 수강생의 특정 과목 회차별 등급 조회
+     *
+     * @author 손준형
+     */
+    private void readSubjectGradeByStudent() {
+        outputView.readStudentId();
+        int studentId = inputView.readStudentId();
+        Student student = campManageService.getStudentByStudentId(studentId);
+        outputView.readSubject(student);
+        int subjectId = inputView.readSubjectIdByStudentId(student);
+
+        try{
+            Score score = campManageService.hasScore(student, subjectId);
+            outputView.readSubjectGradeByStudent(score);
+        }
+        catch (IllegalArgumentException ignored){}
 
     }
 

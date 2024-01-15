@@ -1,11 +1,9 @@
 package campManage.view;
 
-import campManage.domain.Score;
 import campManage.domain.State;
 import campManage.domain.Student;
 import campManage.domain.StudentList;
 import campManage.domain.Subject;
-import campManage.service.CampManageService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -101,7 +99,6 @@ public class InputView {
         return getInputWithValidation(this::validateManageReadScoreRange, INPUT_ERROR_MESSAGE);
     }
 
-
     public State state() {
         Function<Integer, State> stateMapper = State::getStateByInput;
         return getInputWithValidation(stateMapper, STATE_ERROR_MESSAGE);
@@ -116,6 +113,17 @@ public class InputView {
                 return input;
             } catch (IllegalArgumentException e) {
                 System.out.println(NAME_ERROR_MESSAGE);
+            }
+        }
+    }
+
+    public int readSubjectIdByStudentId(Student student) {
+        while (true) {
+            try {
+                int input = readUserInput();
+                return validateSubjectRange(student, input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(INPUT_ERROR_MESSAGE);
             }
         }
     }
@@ -195,6 +203,10 @@ public class InputView {
 
     private int validateManageReadScoreRange(int manageReadScore) {
         return validateRange(manageReadScore, MANAGE_READ_SCORE_END_RANGE);
+    }
+
+    private int validateSubjectRange(Student student, int subjectId) {
+        return validateRange(subjectId, student.getSubject().size());
     }
 
     private void validateIsDuplicate(List<String> subjectNumbers) {
