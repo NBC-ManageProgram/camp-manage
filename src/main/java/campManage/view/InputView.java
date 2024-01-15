@@ -326,11 +326,17 @@ public class InputView {
         }
     }
     public int roundSelect(int roundSize){
-        int round = readUserInput();
-        if(roundSize < round || 0 > round){
-            System.out.println("[ERROR] 다시 입력해주세요");
+        while (true) {
+            try {
+                int round = readUserInput();
+                if(round > 0 || round < roundSize){
+                    return round;
+                }
+                throw new IllegalArgumentException();
+            } catch (IllegalArgumentException e) {
+                System.out.println("[ERROR] 잘못된 입력입니다. 알맞은 회차를 입력해주세요.");
+            }
         }
-        return round;
     }
     public int inputScore(){
         int score = readUserInput();

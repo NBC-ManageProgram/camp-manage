@@ -252,21 +252,24 @@ public class CampManageController {
         outputView.subjectSelect(student);
         int subjectIndex = inputView.subjectSelect(student.getSubject().size()); //Subject에 들어온순서
         int subjectId = student.getSubject().get(subjectIndex).ordinal();       //과목.ordinal
-        //회차입력
-        outputView.roundSelect(student, subjectIndex);
-        //System.out.println(student.getScores().get(subjectIndex).getScorePerRound().size());
-        int roundSize = student.getScores().get(subjectIndex).getScorePerRound().size();
-        int subjectRound = inputView.roundSelect(roundSize);
-        //점수입력
-        outputView.updateScore(student, subjectIndex, subjectRound);
-        int subjectScore = inputView.inputScore(); //새로받은 점수
+        int scoreIndex = campManageService.getScoreIndex(student, subjectId);   //그 과목 인덱스 찾기
+        if (scoreIndex == 10) { // ordinal은 10을 넘을 수 없기에 초기값을 10으로 설정해뒀습니다.
+            System.out.println("찾을 수 없습니다.");
+        }
+        else {
+            int roundSize = student.getScores().get(scoreIndex).getScorePerRound().size();
+            //회차입력
+            outputView.roundSelect(student, scoreIndex);
+            int subjectRound = inputView.roundSelect(roundSize);
 
-        System.out.println(student.getScores());
-        //점수 수정
-        student.getScores().get(subjectIndex).setScorePerRound(subjectRound, subjectScore);
-        //완...료
-        outputView.successScore(student, subjectIndex, subjectRound, subjectScore);
-
+            //점수입력
+            outputView.updateScore(student, scoreIndex, subjectRound);
+            int subjectScore = inputView.inputScore(); //새로받은 점수
+            //점수 수정
+            student.getScores().get(scoreIndex).setScorePerRound(subjectRound, subjectScore);
+            //완...료
+            outputView.successScore(student, scoreIndex, subjectRound, subjectScore);
+        }
     }
 
 
