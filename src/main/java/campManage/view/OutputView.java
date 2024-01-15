@@ -246,4 +246,14 @@ public class OutputView {
         System.out.println(student.getSubjectNames() + " |");
     }
 
+    public void manageReadScore() {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "1. 수강생의 특정 과목 회차별 등급을 조회\n" +
+                "2. 특정 상태 수강생들의 필수 과목별 평균 등급 조회\n" +
+                "3. 수강생의 과목별 평균 등급 조회\n" +
+                "4. 돌아가기\n" +
+
+                "조회 번호를 선택하세요...");
+    }
 }

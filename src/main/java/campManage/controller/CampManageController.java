@@ -240,6 +240,15 @@ public class CampManageController {
 
     // 점수 조회
     private void readScore() {
+        outputView.manageReadScore();
+        int manageReadScore = inputView.manageReadScore();
+        switch (manageReadScore) {
+            case 1 -> System.out.println("수강생의 특정 과목 회차별 등급을 조회");
+            case 2 -> System.out.println("특정 상태 수강생들의 필수 과목별 평균 등급 조회");
+            case 3 -> System.out.println("수강생의 과목별 평균 등급 조회");
+            case 4 -> outputView.backToManageMenu();
+
+        }
 
     }
 
