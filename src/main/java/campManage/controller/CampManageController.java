@@ -212,12 +212,11 @@ public class CampManageController {
         outputView.inputStudentId();
         //검증한 고유번호 입력받기
         int studentID = inputView.readStudentId();
-        //서비스
         Student student = campManageService.getStudentByStudentId(studentID);
 
         // 과목 입력하세요 출력
         outputView.ShowStudentName(student, student.getSubject());
-        //점수 입력할 과목 선택받기 student에 있는 인덱스 번호 (선택번호 -1)
+        //점수 입력할 과목 선택받기
         int selectedSubject = inputView.SelectedSubject(student.getSubject().size());
         Score subjectScore = campManageService.getSubjectScore(student, selectedSubject);
 
@@ -234,8 +233,8 @@ public class CampManageController {
         } else {
             subjectScore.addScore(inputSubjectScore);
             subjectScore.addGrade(grade);
-        OutputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
-            grade);
+            OutputView.createScoreComplete(student, selectedSubject, inputSubjectScore, emptyRound,
+                grade);
         }
 
     }
@@ -262,21 +261,22 @@ public class CampManageController {
         int scoreIndex = campManageService.getScoreIndex(student, subjectId);   //그 과목 인덱스 찾기
         if (scoreIndex == 10) { // ordinal은 10을 넘을 수 없기에 초기값을 10으로 설정해뒀습니다.
             System.out.println("찾을 수 없습니다.");
-        }
-        else {
+        } else {
             int roundSize = student.getScores().get(scoreIndex).getScorePerRound().size();
             //회차입력
-            outputView.roundSelect(student, scoreIndex);
+            outputView.roundSelect(student, subjectIndex);
             int subjectRound = inputView.roundSelect(roundSize);
 
             //점수입력
-            outputView.updateScore(student, scoreIndex, subjectRound);
+            outputView.updateScore(student, subjectIndex, subjectRound);
             int subjectScore = inputView.inputScore(); //새로받은 점수
             //점수 수정
             student.getScores().get(scoreIndex).setScorePerRound(subjectRound, subjectScore);
             //완...료
-            outputView.successScore(student, scoreIndex, subjectRound, subjectScore);
+            outputView.successScore(student, subjectIndex, subjectRound, subjectScore);
+        }
+
+
     }
-
-
 }
+

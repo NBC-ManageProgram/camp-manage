@@ -257,7 +257,7 @@ public class OutputView {
     public void roundSelect(Student student, int subject) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-            "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getScores().get(subject).getSubjectId() + " |");
+            "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject().get(subject).getName() + " |");
 
         try {
             int round = student.getScores().get(subject).getScorePerRound().size();

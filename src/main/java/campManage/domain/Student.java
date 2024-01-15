@@ -1,5 +1,6 @@
 package campManage.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,11 +61,5 @@ public class Student {
     public String getSubjectNames() {
         return subject.stream().map(Subject::getName)
             .collect(Collectors.joining(", "));
-    }
-    public Score getSubjectScore(Student student, int subjectId) {
-        scores = student.getScores();
-        Score newScore = new Score(subjectId, new ArrayList<>());
-        student.addScore(newScore);
-        return newScore;
     }
 }
