@@ -69,6 +69,7 @@ public class StudentList {
         return students.stream().filter(e -> e.getState() == state)
                 .filter(e -> e.getSubject().stream()
                         .anyMatch(i -> i.getSubjectCategory() == SubjectCategory.REQUIRE)).toList();
+
     }
 
     public int validateStudentsId(int studentId) { // return int
@@ -81,7 +82,8 @@ public class StudentList {
     }
 
     public boolean checkStudentScoreIsEmpty() {
-        return students.get(0).getScores().isEmpty();
+        // 등록된 수강생 중 한명이라도 등록이 안되어있는 상태에서 실행시키면 true를 반환
+        return students.stream().anyMatch(e-> e.getScores().isEmpty());
     }
 
     // 학생 정보 가져오기
