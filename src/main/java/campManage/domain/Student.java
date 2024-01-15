@@ -56,9 +56,11 @@ public class Student {
     public void addScore(Score score) {
         scores.add(score);
     }
-  
+
     public String getSubjectNames() {
         return subject.stream().map(Subject::getName)
             .collect(Collectors.joining(", "));
     }
+
+
 }
