@@ -34,6 +34,7 @@ public class InputView {
     private static final int MANAGE_MENU_END_RANGE = 3;
     private static final int MANAGE_STUDENT_END_RANGE = 5;
     private static final int MANAGE_SCORE_END_RANGE = 4;
+    private static final int MANAGE_READ_SCORE_END_RANGE = 4;
 
     private static final Pattern NAME_PATTERN = Pattern.compile("^[가-힣]{2,10}$");
     private static final Pattern REQUIRE_SUBJECT_PATTERN = Pattern.compile("([1-5]\\s){2,}[1-5]");
@@ -94,6 +95,10 @@ public class InputView {
 
     public int manageScore() {
         return getInputWithValidation(this::validateManageScoreRange, INPUT_ERROR_MESSAGE);
+    }
+
+    public int manageReadScore() {
+        return getInputWithValidation(this::validateManageReadScoreRange, INPUT_ERROR_MESSAGE);
     }
 
 
@@ -186,6 +191,10 @@ public class InputView {
 
     private int validateManageScoreRange(int manageScoreNumber) {
         return validateRange(manageScoreNumber, MANAGE_SCORE_END_RANGE);
+    }
+
+    private int validateManageReadScoreRange(int manageReadScore) {
+        return validateRange(manageReadScore, MANAGE_READ_SCORE_END_RANGE);
     }
 
     private void validateIsDuplicate(List<String> subjectNumbers) {
@@ -322,4 +331,5 @@ public class InputView {
         }
         throw new IllegalArgumentException();
     }
+
 }
