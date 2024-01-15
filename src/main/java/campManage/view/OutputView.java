@@ -186,7 +186,7 @@ public class OutputView {
 
     public void ShowStudentName(Student student, List<Subject> subjects) {
         System.out.println(SEPARATE_LINE);
-        System.out.println(student.getStudentId() + "|" + student.getName() + "|");
+        System.out.println("| " + student.getStudentId() + " | " + student.getName() + " | ");
         System.out.println("[[ 과목을 입력하세요 ]]");
 
         for (int i = 0; i < subjects.size(); i++) {
@@ -195,27 +195,27 @@ public class OutputView {
         }
     }
 
-    public static void createScore(Student student, int subjectIndex, int round) {
+    public void createScore(Student student, int subjectIndex, int round) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
-                        .get(subjectIndex).getName() + " | " + round + "회차");
+            "| " + student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
+                .get(subjectIndex).getName() + " | " + round + "회차 |");
         System.out.println("[[ 점수를 입력하세요 ]]");
-
+    }
+  
+    public void createScoreComplete(Student student, int subjectIndex, int subjectScore,
+        int round, SubjectGrade grade) {
+        System.out.println(SEPARATE_LINE);
+        System.out.println(
+            "| " + student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
+                .get(subjectIndex).getName() + " | " + round + "회차 | " + subjectScore + "점 | " +
+                grade + "등급 |");
+        System.out.println("[[ 등록이 완료되었습니다. ]]");
 
     }
 
-
-    public static void createScoreComplete(Student student, int subjectIndex, int subjectScore,
-            int round, SubjectGrade grade) {
-        System.out.println(SEPARATE_LINE);
-        System.out.println(
-                student.getStudentId() + " | " + student.getName() + " | " + student.getSubject()
-                        .get(subjectIndex).getName() + "| " + round + "회차 | " + subjectScore + " | "
-                        +
-                        grade + "등급");
-        System.out.println("[[ 등록이 완료되었습니다. ]]");
-
+    public void roundSizeError() {
+        System.out.println("[ERROR] 10회 이상의 입력은 불가능합니다.");
     }
 
     public void readStudent() {
@@ -253,34 +253,31 @@ public class OutputView {
         System.out.println("| " + student.getStudentId() + " |" + student.getName() + " |");
         System.out.println("[[ 과목을 입력하세요. ]]");
         for (int i = 0; i < student.getSubject().size(); i++) {
-            System.out.println((i + 1) + ". " + student.getSubject().get(i).getName() + "|"
-                    + student.getSubject().get(i).ordinal());
+            System.out.println((i + 1) + ". " + student.getSubject().get(i).getName());
         }
     }
 
-    public void roundSelect(Student student, int subject) {
+    public void roundSelect(Student student, int subject, int subjectIndex) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "| " + student.getStudentId() + " |" + student.getName() + " | "
-                        + student.getSubject().get(subject).getName() + " |");
-
+            "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject()
+                .get(subjectIndex).getName() + " |");
         try {
             int round = student.getScores().get(subject).getScorePerRound().size();
+            System.out.println(round);
             System.out.printf("총 회차 : %d\n", round);
             System.out.println("[[ 회차를 입력하세요 ]]");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("[ERROR] 회차를 수정할 수 없습니다. 다시 시험봐주세요");
         }
     }
-
-    public void updateScore(Student student, int subject, int subjectRound) {
+    public void updateScore(Student student, int subject, int subjectRound, int scoreIndex) {
         System.out.println(SEPARATE_LINE);
         System.out.println(
-                "| " + student.getStudentId() + " |" + student.getName() + " | "
-                        + student.getSubject()
-                        .get(subject).getName() + " | " + subjectRound + " |");
-        System.out.println("현재 점수 : " + student.getScores().get(subject).getScorePerRound()
-                .get(subjectRound - 1));
+            "| " + student.getStudentId() + " |" + student.getName() + " | " + student.getSubject()
+                .get(subject).getName() + " | " + subjectRound + " |");
+        System.out.println("현재 점수 : " + student.getScores().get(scoreIndex).getScorePerRound()
+            .get(subjectRound - 1));
         System.out.println("[[ 새로운 점수를 입력하세요 ]]");
 
     }
