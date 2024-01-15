@@ -306,4 +306,12 @@ public class OutputView {
 
                 "조회 번호를 선택하세요...");
     }
+    public void showAvgStudent(Student student){
+        System.out.println(SEPARATE_LINE);
+        System.out.println("[[ [**" + student.getName() +"**] 의 과목별 평균 등급");
+        System.out.println("| 과목명 | 평균등급 |");
+    }
+
+    public void avgGrade(Student student, int scoreIndex) {
+    }
 }

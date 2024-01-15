@@ -246,12 +246,39 @@ public class CampManageController {
         switch (manageReadScore) {
             case 1 -> System.out.println("수강생의 특정 과목 회차별 등급을 조회");
             case 2 -> System.out.println("특정 상태 수강생들의 필수 과목별 평균 등급 조회");
-            case 3 -> System.out.println("수강생의 과목별 평균 등급 조회");
+            case 3 -> readAvgGrade();
             case 4 -> outputView.backToManageMenu();
 
         }
 
     }
+
+
+    /**
+     * 점수 조회(수강생의 과목별 평균 등급 조회)
+     *
+     * @author 유경진
+     */
+    private void readAvgGrade(){
+        outputView.inputStudentId();
+        int id = inputView.deleteStudentId();
+        // 서비스
+        Student student = campManageService.getStudentByStudentId(id);
+        //학생정보 출력
+        outputView.showAvgStudent(student);
+        // 서비스
+        for(int i = 0; i < student.getSubject().size(); i++){
+            int subjectId = student.getSubject().get(i).ordinal();       //과목.ordinal
+            int scoreIndex = campManageService.getScoreIndex(student, subjectId);   //그 과목 인덱스 찾기
+            if(scoreIndex < 10) {
+                System.out.println(student.getSubject().get(i).getName() + " | " + campManageService.getSubjectGrade(student, campManageService.avgScore(student, scoreIndex), i));
+            }
+            else{
+                System.out.println(student.getSubject().get(i).getName() + " | 점수가 없습니다.");
+            }
+        }
+    }
+
 
     /**
      * 점수 수정
@@ -260,7 +287,7 @@ public class CampManageController {
      */
     private void updateScore() {
         outputView.inputStudentId();
-        int id = inputView.deleteStudentId();   //  <-이름수정이 필요할듯(공용사용)
+        int id = inputView.deleteStudentId();
         // 서비스
         Student student = campManageService.getStudentByStudentId(id);
         //과목입력
